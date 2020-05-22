@@ -64,7 +64,7 @@
                             android:id="@+id/Person"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:drawableTop="@drawable/baseline_account_circle_black_48"
+
                             android:text="Person"
                              />
 
@@ -72,7 +72,7 @@
                             android:id="@+id/Currency"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:drawableTop="@drawable/round_monetization_on_black_48dp"
+
                             android:paddingTop="25dp"
                             android:text="Currency" />
 
