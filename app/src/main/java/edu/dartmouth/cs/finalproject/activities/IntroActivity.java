@@ -47,7 +47,7 @@ public class IntroActivity extends AppIntro {
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.image_recognition_slide),
                 getString(R.string.image_recognition_string),
-                R.drawable.image_recognition_logo,
+                R.drawable.facial_recognition_logo_2,
                 ContextCompat.getColor(getApplicationContext(), R.color.slide),
                 Color.BLACK,
                 Color.BLACK));
