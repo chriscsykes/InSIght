@@ -3,7 +3,6 @@ package edu.dartmouth.cs.finalproject.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,7 +20,6 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setUpCamera();
         setUpActionBar();
         drawerLayout = findViewById(R.id.drawer_layout);
-
     }
 
     @Override
@@ -58,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_help){
-            findViewById(R.id.navigation);
-//            drawerLayout.openDrawer();
+            NavigationView navigationView = findViewById(R.id.navigation);
+            drawerLayout.openDrawer(navigationView);
         }
         return super.onOptionsItemSelected(item);
     }
 
     /*
-     * helper to hide action bar
+     * helper to set up action bar
      */
     private void setUpActionBar() {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         // If Permissions denied simply return
         if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED)) {
-             return;
+            return;
 
         }
         PreviewView previewView = findViewById(R.id.preview_view);
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Attach use cases to the camera with the same lifecycle owner
                 mCamera = cameraProvider.bindToLifecycle(
-                        ((LifecycleOwner) this),
+                        (this),
                         cameraSelector,
                         preview,
                         imageCapture);
@@ -156,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 1
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                   ) {
+            ) {
                 // permission was granted, yay!
 
                 setUpCamera();

@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">InSight</string>
+    <string name="open_drawer">open drawer</string>
+    <string name="close_drawer">close drawer</string>
+    <string name="menu_request_call">Request a Call</string>
+    <string name="menu_read_tutorials">Read Tutorials</string>
+    <string name="menu_feedback">Provide Feedback</string>
+    <string name="nav_header_desc">Navigation Bar: Select item</string>
+    <string name="nav_header_title">InSight</string>
+    <string name="nav_header_subtitle">InSight@gmail.com</string>
+    <string name="about_insight">About InSight</string>
+    <string name="share_with_friends">Share with Friends</string>
+    <string name="short_text">Short Text</string>
+    <string name="color">Color</string>
+    <string name="bar_code">Bar Code</string>
+    <string name="currency">Currency</string>
+    <string name="person">Person</string>
 </resources>

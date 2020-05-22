@@ -27,7 +27,6 @@
                     android:id="@+id/preview_view"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" >
-
                 </androidx.camera.view.PreviewView>
 
                 <HorizontalScrollView
@@ -40,48 +39,56 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:flexDirection="row"
-                        app:justifyContent="space_evenly">
+                        app:justifyContent="space_around"
+                        >
 
                         <Button
                             android:id="@+id/ShortText"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:drawableTop="@drawable/baseline_subject_black_48"
-                            android:text="Short Text"
-                            app:layout_minWidth="120dp" />
+                            android:text="@string/short_text"
+                            app:layout_minWidth="120dp"
+                            android:background="@color/colorPrimary"
+                            android:paddingTop="10dp"/>
 
                         <Button
                             android:id="@+id/BarCode"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
+                            android:background="@color/colorPrimary"
                             android:drawableTop="@drawable/baseline_barcode_80"
-                            android:text="Bar Code"
+                            android:text="@string/bar_code"
                             app:layout_minWidth="120dp" />
 
                         <Button
                             android:id="@+id/Person"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:drawableTop="@drawable/baseline_account_circle_black_48"
-                            android:text="Person"
-                            app:layout_minWidth="120dp" />
+                            android:drawableTop="@drawable/baseline_account_circle_black_24"
+                            android:text="@string/person"
+                            app:layout_minWidth="120dp"
+                            android:background="@color/colorPrimary"
+                            android:paddingTop="10dp"/>
 
                         <Button
                             android:id="@+id/Currency"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:drawableTop="@drawable/round_monetization_on_black_48dp"
-                            android:paddingTop="25dp"
-                            android:text="Currency"
-                            app:layout_minWidth="120dp" />
+                            android:drawableTop="@drawable/ic_currency"
+                            android:text="@string/currency"
+                            app:layout_minWidth="120dp"
+                            android:background="@color/colorPrimary"/>
 
                         <Button
                             android:id="@+id/Color"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
+                            android:background="@color/colorPrimary"
                             android:drawableTop="@drawable/baseline_opacity_black_48"
-                            android:text="Color"
-                            app:layout_minWidth="120dp" />
+                            android:text="@string/color"
+                            app:layout_minWidth="120dp"
+                            android:paddingTop="10dp"/>
                     </com.google.android.flexbox.FlexboxLayout>
                 </HorizontalScrollView>
             </FrameLayout>
@@ -92,6 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:menu="@menu/navigation_items" />
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_items"/>
 </androidx.drawerlayout.widget.DrawerLayout>
 
