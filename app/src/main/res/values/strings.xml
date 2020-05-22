@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">InSight</string>
+
+
+    <string name="welcome_string">InSight assists the visually impaired in their daily lives,
+        leading to an overall better quality of life. </string>
+    <string name="text_to_speech_string">The Text-to-Speech mode allows users to receive audio feedback of
+        words that they cannot see.</string>
+    <string name="barcode_scanner_string">The Barcode Scanner mode provides the user with audio feedback
+        based on the barcode or QR code that was scanned.</string>
+    <string name="image_recognition_string">The Image Recognition mode provides the user with audio feedback
+        of the setting around them. </string>
+
+
+    <string name="text_to_speech_slide">Text-to-Speech</string>
+    <string name="barcode_scanner_slide">Barcode Scanner</string>
+    <string name="image_recognition_slide">Image Recognition</string>
+    <string name="welcome_slide">Welcome to InSight!</string>
+
 </resources>

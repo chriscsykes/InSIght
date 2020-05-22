@@ -1,11 +1,19 @@
 package edu.dartmouth.cs.finalproject.activities;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +31,7 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -32,20 +41,38 @@ import edu.dartmouth.cs.finalproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private ImageCapture imageCapture;
     private Camera mCamera;
     private DrawerLayout drawerLayout;
 
+    private LinearLayout linearLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
+        startActivity(intent);
+
         checkPermissions();
         setUpCamera();
         setUpActionBar();
         drawerLayout = findViewById(R.id.drawer_layout);
+        linearLayout = findViewById(R.id.linear_layout);
 
+        // get device screen width
+        int width = getScreenWidth(MainActivity.this);
+        Log.d(TAG, "screenwidth: " + width);
+
+        // size each button to the width of the screen
+        int child_count = linearLayout.getChildCount();
+        Log.d(TAG, "Child count: " + child_count);
+        for (int i=0; i<child_count; i++) {
+            Button button = (Button) linearLayout.getChildAt(i);
+            button.setWidth(width);
+        }
     }
 
     @Override
@@ -185,5 +212,14 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-
+    /*
+     * Helper function that gets the screen with in order to properly size each button
+     */
+    public static int getScreenWidth(Context context) {
+        WindowManager windowManager = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
+    }
 }
