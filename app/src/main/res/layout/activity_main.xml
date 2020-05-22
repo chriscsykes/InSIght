@@ -27,7 +27,6 @@
                     android:id="@+id/preview_view"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" >
-
                 </androidx.camera.view.PreviewView>
 
                 <HorizontalScrollView
@@ -36,6 +35,7 @@
                     android:layout_height="120dp"
                     android:layout_gravity="bottom"
                     android:scrollbars="horizontal">
+
 
                     <LinearLayout
                         android:id="@+id/linear_layout"
@@ -48,6 +48,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_subject_black_48"
+
                             android:text="Short Text"
                             />
 
@@ -82,6 +83,8 @@
                             android:drawableTop="@drawable/baseline_opacity_black_48"
                             android:text="Color"/>
                     </LinearLayout>
+
+
                 </HorizontalScrollView>
             </FrameLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -91,6 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:menu="@menu/navigation_items" />
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_items"/>
 </androidx.drawerlayout.widget.DrawerLayout>
 
