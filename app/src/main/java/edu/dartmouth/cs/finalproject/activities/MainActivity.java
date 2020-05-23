@@ -69,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
 
-//        SnapScrollView snapScrollView = new SnapScrollView(MainActivity.this);
-//        snapScrollView.setFeatureItems();
+
 
         linearLayout = findViewById(R.id.linear_layout);
 
@@ -236,99 +235,5 @@ public class MainActivity extends AppCompatActivity {
         return dm.widthPixels;
     }
 
-
-
-
-
-//    public class SnapScrollView extends HorizontalScrollView {
-//
-//        private static final int SWIPE_MIN_DISTANCE = 5;
-//        private static final int SWIPE_THRESHOLD_VELOCITY = 300;
-//        private static final String TAG = "SnapScrollView";
-//
-//        private ArrayList<Button> mItems = null;
-//        private GestureDetector mGestureDetector;
-//        private int mActiveFeature = 0;
-//        LinearLayout linearLayout;
-//
-//
-//        public SnapScrollView(Context context, AttributeSet attrs, int defStyle) {
-//            super(context, attrs, defStyle);
-//        }
-//
-//        public SnapScrollView(Context context, AttributeSet attrs) {
-//            super(context, attrs);
-//        }
-//
-//        public SnapScrollView(Context context) {
-//            super(context);
-//        }
-//
-//        public void setFeatureItems() {
-//
-//            linearLayout = findViewById(R.id.linear_layout);
-//
-//            // get device screen width
-//            int width = getScreenWidth(MainActivity.this);
-//            Log.d(TAG, "screenwidth: " + width);
-//
-//            // size each button to the width of the screen
-//            int child_count = linearLayout.getChildCount();
-//            Log.d(TAG, "Child count: " + child_count);
-//            for (int i = 0; i < child_count; i++) {
-//                Button button = (Button) linearLayout.getChildAt(i);
-//                button.setWidth(width);
-//            }
-//
-//            setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    //If the user swipes
-//                    if (mGestureDetector.onTouchEvent(event)) {
-//                        return true;
-//                    } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-//                        int scrollX = getScrollX();
-//                        int featureWidth = v.getMeasuredWidth();
-//                        mActiveFeature = ((scrollX + (featureWidth / 2)) / featureWidth);
-//                        int scrollTo = mActiveFeature * featureWidth;
-//                        smoothScrollTo(scrollTo, 0);
-//                        return true;
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//            });
-//
-//            mGestureDetector = new GestureDetector(new MyGestureDetector());
-//
-//        }
-//
-//
-//        class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
-//            @Override
-//            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//                try {
-//                    //right to left
-//                    if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-//                        int featureWidth = getMeasuredWidth();
-//                        mActiveFeature = (mActiveFeature < (mItems.size() - 1)) ? mActiveFeature + 1 : mItems.size() - 1;
-//                        smoothScrollTo(mActiveFeature * featureWidth, 0);
-//                        return true;
-//                    }
-//                    //left to right
-//                    else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-//                        int featureWidth = getMeasuredWidth();
-//                        mActiveFeature = (mActiveFeature > 0) ? mActiveFeature - 1 : 0;
-//                        smoothScrollTo(mActiveFeature * featureWidth, 0);
-//                        return true;
-//                    }
-//                } catch (Exception e) {
-//                    Log.e("Fling", "There was an error processing the Fling event:" + e.getMessage());
-//                }
-//                return false;
-//            }
-//        }
-//
-//    }
 
 }
