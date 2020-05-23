@@ -8,6 +8,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/my_toolbar"
             android:layout_width="match_parent"
@@ -15,8 +16,21 @@
             android:elevation="4dp"
             android:theme="@style/AppTheme.ActionBar.Transparent"
             app:menu="@menu/toolbar_items"
+            app:navigationIcon="@mipmap/ic_launcher_foreground"
             app:titleTextColor="@color/cardview_light_background"
-            />
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/cardview_light_background"
+                android:text="@string/app_name"
+                android:textSize="20dp"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                />
+        </androidx.appcompat.widget.Toolbar>
 
             <FrameLayout
                 android:id="@+id/container"
@@ -64,24 +78,25 @@
                             android:id="@+id/Person"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-
-                            android:text="Person"
+                            android:drawableTop="@drawable/ic_image_recognition"
+                            android:text="Image"
                              />
 
                         <Button
                             android:id="@+id/Currency"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-
-                            android:paddingTop="25dp"
-                            android:text="Currency" />
+                            android:drawableTop="@drawable/ic_currency"
+                            android:text="Currency"
+                            />
 
                         <Button
                             android:id="@+id/Color"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_opacity_black_48"
-                            android:text="Color"/>
+                            android:text="Color"
+                            />
                     </LinearLayout>
 
 
