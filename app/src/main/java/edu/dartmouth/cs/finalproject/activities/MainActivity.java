@@ -5,10 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.Gravity;
+
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -31,6 +38,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import edu.dartmouth.cs.finalproject.R;
@@ -56,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         setUpCamera();
         setUpActionBar();
         drawerLayout = findViewById(R.id.drawer_layout);
+        linearLayout = findViewById(R.id.linear_layout);
+
+
 
         linearLayout = findViewById(R.id.linear_layout);
 
@@ -223,5 +234,6 @@ public class MainActivity extends AppCompatActivity {
         windowManager.getDefaultDisplay().getMetrics(dm);
         return dm.widthPixels;
     }
+
 
 }

@@ -2,7 +2,6 @@
     <string name="app_name">InSight</string>
 
 
-
     <string name="welcome_string">InSight assists the visually impaired in their daily lives,
         leading to an overall better quality of life. </string>
     <string name="text_to_speech_string">The Text-to-Speech mode allows users to receive audio feedback of
@@ -34,5 +33,14 @@
     <string name="bar_code">Bar Code</string>
     <string name="currency">Currency</string>
     <string name="person">Person</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 
 </resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "48464915407",
+    "firebase_url": "https://insight-85ce1.firebaseio.com",
+    "project_id": "insight-85ce1",
+    "storage_bucket": "insight-85ce1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48464915407:android:f79ac7f92523632f2d40ba",
+        "android_client_info": {
+          "package_name": "edu.dartmouth.cs.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48464915407-seva266iu9qkbi0i3h5ks82tfu0korq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGF56yKrsDPJ-CMJNBKYtenppxwP_kVvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48464915407-seva266iu9qkbi0i3h5ks82tfu0korq6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
