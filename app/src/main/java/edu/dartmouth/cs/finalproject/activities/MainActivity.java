@@ -5,17 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
-
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -33,7 +28,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -72,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // size each button to the width of the screen
         int child_count = linearLayout.getChildCount();
         Log.d(TAG, "Child count: " + child_count);
-        for (int i=0; i<child_count; i++) {
+        for (int i = 0; i < child_count; i++) {
             Button button = (Button) linearLayout.getChildAt(i);
             button.setWidth(width);
         }
@@ -87,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_help){
+        if (item.getItemId() == R.id.action_help) {
             NavigationView navigationView = findViewById(R.id.navigation);
             drawerLayout.openDrawer(navigationView);
         }
@@ -100,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
     private void setUpActionBar() {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        // Remove default title text
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
     }
 
 
