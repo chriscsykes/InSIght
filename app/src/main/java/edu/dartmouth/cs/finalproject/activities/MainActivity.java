@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import edu.dartmouth.cs.finalproject.R;
+import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
 
     private LinearLayout linearLayout;
-    private TextToSpeechActivity mTextToSpeechEngine;
-
+    private TextToSpeechEngine mTextToSpeechEngine;
+    private NavigationView navigationView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,11 @@ public class MainActivity extends AppCompatActivity {
         setUpActionBar();
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
-
+        navigationView = findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            return handleNavigationItemSelected(item);
+        });
+        mTextToSpeechEngine = new TextToSpeechEngine(this);
 
 
         linearLayout = findViewById(R.id.linear_layout);
@@ -82,6 +87,65 @@ public class MainActivity extends AppCompatActivity {
             Button button = (Button) linearLayout.getChildAt(i);
             button.setWidth(width);
         }
+    }
+
+    private boolean handleNavigationItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.nav_tutorials:
+                mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
+                readTutorials();
+                break;
+            case R.id.nav_feedback:
+                mTextToSpeechEngine.speakText("Provide feedback", Constants.feedBackId);
+                provideFeedBack();
+                break;
+            case R.id.nav_request_call:
+                mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
+                requestCall();
+                break;
+            case R.id.nav_about_insight:
+                mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
+                learnAboutInsight();
+                break;
+            case R.id.nav_share_with_friends:
+                mTextToSpeechEngine.speakText("Share with Friends", Constants.shareWithFriendsId);
+                shareWithFriends();
+                break;
+            default:
+                return false;
+        }
+        return true;
+
+    }
+
+    /*
+     * Allows the user to send feedback to developers
+     */
+    private void provideFeedBack() {
+    }
+
+    /*
+     * Allows the user to share the app with friends
+     */
+    private void shareWithFriends() {
+    }
+
+    /*
+     * Sends user to Insight homePage
+     */
+    private void learnAboutInsight() {
+    }
+
+    /*
+     * Allows the user to make a call to request for assistance
+     */
+    private void requestCall() {
+    }
+
+    /*
+     * Probably takes User them to website tutorials/ onBoarder Screen
+     */
+    private void readTutorials() {
     }
 
     /*
@@ -112,7 +176,10 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_help) {
             NavigationView navigationView = findViewById(R.id.navigation);
             drawerLayout.openDrawer(navigationView);
+            mTextToSpeechEngine.speakText("help", Constants.helpId);
         }
+
+        Log.d(TAG, "onOptionsItemSelected: " + item.toString());
 
 
         return super.onOptionsItemSelected(item);
@@ -253,7 +320,6 @@ public class MainActivity extends AppCompatActivity {
         windowManager.getDefaultDisplay().getMetrics(dm);
         return dm.widthPixels;
     }
-
 
 
 }
