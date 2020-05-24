@@ -62,6 +62,8 @@
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_subject_black_48"
                             android:text="@string/short_text"
+                            android:onClick="handleTextRecognition"
+
                             />
 
                         <Button
@@ -70,14 +72,16 @@
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_barcode_80"
                             android:text="@string/bar_code"
+                            android:onClick="handleBarCodeRecognition"
                              />
 
                         <Button
-                            android:id="@+id/Person"
+                            android:id="@+id/Image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/ic_image_recognition"
                             android:text="@string/image"
+                            android:onClick="handleImageRecognition"
                              />
 
                         <Button
@@ -86,6 +90,7 @@
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/ic_currency"
                             android:text="@string/currency"
+                            android:onClick="handleCurrencyRecognition"
                             />
 
                         <Button
@@ -94,6 +99,7 @@
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_opacity_black_48"
                             android:text="@string/color"
+                            android:onClick="handleColorRecognition"
                             />
                     </LinearLayout>
 

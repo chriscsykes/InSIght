@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -58,12 +59,11 @@ public class MainActivity extends AppCompatActivity {
         checkPermissions();
         setUpCamera();
         setUpActionBar();
+
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
         navigationView = findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(item -> {
-            return handleNavigationItemSelected(item);
-        });
+        navigationView.setNavigationItemSelectedListener(item -> handleNavigationItemSelected(item));
         mTextToSpeechEngine = new TextToSpeechEngine(this);
 
 
@@ -170,9 +170,14 @@ public class MainActivity extends AppCompatActivity {
             NavigationView navigationView = findViewById(R.id.navigation);
             drawerLayout.openDrawer(navigationView);
             mTextToSpeechEngine.speakText("help", Constants.helpId);
+        }else{
+            // No other action button in action bar
+            mTextToSpeechEngine.speakText("Insight App Logo", Constants.helpId);
         }
 
-        Log.d(TAG, "onOptionsItemSelected: " + item.toString());
+
+
+        Log.d(TAG, "onOptionsItemSelected: " + item.getItemId());
 
 
         return super.onOptionsItemSelected(item);
@@ -315,5 +320,40 @@ public class MainActivity extends AppCompatActivity {
         return dm.widthPixels;
     }
 
+    /*
+     * Driver methods for Text-to-Speech Feature
+     */
+    public void handleTextRecognition(View view) {
+        mTextToSpeechEngine.speakText("Short Text", Constants.shortTextId);
+    }
 
+    /*
+     * Driver methods for Text-to-Speech Feature
+     */
+    public void handleBarCodeRecognition(View view) {
+        mTextToSpeechEngine.speakText("Bar Code", Constants.barCodeId);
+    }
+
+    /*
+     * Driver methods for Image Recognition feature Feature
+     */
+    public void handleImageRecognition(View view) {
+        mTextToSpeechEngine.speakText("Image", Constants.imageId);
+    }
+
+    /*
+     * Driver methods for Currency Recognition Feature
+     */
+    public void handleCurrencyRecognition(View view) {
+        mTextToSpeechEngine.speakText("Currency", Constants.currencyId);
+    }
+
+    /*
+     * Driver methods for Color recognition Feature
+     */
+    public void handleColorRecognition(View view) {
+        mTextToSpeechEngine.speakText("Color", Constants.colorId);
+    }
 }
+
+
