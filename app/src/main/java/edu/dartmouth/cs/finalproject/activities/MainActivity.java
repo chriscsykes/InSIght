@@ -3,9 +3,11 @@ package edu.dartmouth.cs.finalproject.activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -51,15 +53,14 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
 
     private LinearLayout linearLayout;
+    private TextToSpeechActivity mTextToSpeechEngine;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
-        startActivity(intent);
-
+        launchOnBoarder();
         checkPermissions();
         setUpCamera();
         setUpActionBar();
@@ -83,6 +84,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Determines if this is the app's first installation before launching onBoarder
+     * else we take note of the app's installation using shared Prefs
+     */
+    private void launchOnBoarder() {
+        SharedPreferences prefs = this.getPreferences(MODE_PRIVATE);
+        if(!prefs.getBoolean(Constants.firstTime, false)) {
+            // we should run our one time code
+            Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
+            startActivity(intent);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean(Constants.firstTime, true);
+            editor.commit();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_items, menu);
@@ -96,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
             NavigationView navigationView = findViewById(R.id.navigation);
             drawerLayout.openDrawer(navigationView);
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -234,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
         windowManager.getDefaultDisplay().getMetrics(dm);
         return dm.widthPixels;
     }
+
 
 
 }
