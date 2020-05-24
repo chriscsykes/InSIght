@@ -3,18 +3,13 @@ package edu.dartmouth.cs.finalproject.activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.Gravity;
-
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,6 +17,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -38,10 +34,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import edu.dartmouth.cs.finalproject.R;
+import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,21 +47,24 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
 
     private LinearLayout linearLayout;
+    private TextToSpeechEngine mTextToSpeechEngine;
+    private NavigationView navigationView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
-        startActivity(intent);
-
+        launchOnBoarder();
         checkPermissions();
         setUpCamera();
         setUpActionBar();
+
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
-
+        navigationView = findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(item -> handleNavigationItemSelected(item));
+        mTextToSpeechEngine = new TextToSpeechEngine(this);
 
 
         linearLayout = findViewById(R.id.linear_layout);
@@ -83,6 +82,81 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean handleNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_tutorials:
+                mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
+                readTutorials();
+                break;
+            case R.id.nav_feedback:
+                mTextToSpeechEngine.speakText("Provide feedback", Constants.feedBackId);
+                provideFeedBack();
+                break;
+            case R.id.nav_request_call:
+                mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
+                requestCall();
+                break;
+            case R.id.nav_about_insight:
+                mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
+                learnAboutInsight();
+                break;
+            case R.id.nav_share_with_friends:
+                mTextToSpeechEngine.speakText("Share with Friends", Constants.shareWithFriendsId);
+                shareWithFriends();
+                break;
+            default:
+                return false;
+        }
+        return true;
+
+    }
+
+    /*
+     * Allows the user to send feedback to developers
+     */
+    private void provideFeedBack() {
+    }
+
+    /*
+     * Allows the user to share the app with friends
+     */
+    private void shareWithFriends() {
+    }
+
+    /*
+     * Sends user to Insight homePage
+     */
+    private void learnAboutInsight() {
+    }
+
+    /*
+     * Allows the user to make a call to request for assistance
+     */
+    private void requestCall() {
+    }
+
+    /*
+     * Probably takes User them to website tutorials/ onBoarder Screen
+     */
+    private void readTutorials() {
+    }
+
+    /*
+     * Determines if this is the app's first installation before launching onBoarder
+     * else we take note of the app's installation using shared Prefs
+     */
+    private void launchOnBoarder() {
+        SharedPreferences prefs = this.getPreferences(MODE_PRIVATE);
+        if (!prefs.getBoolean(Constants.firstTime, false)) {
+            // we should run our one time code
+            Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
+            startActivity(intent);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean(Constants.firstTime, true);
+            editor.apply();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_items, menu);
@@ -95,7 +169,17 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_help) {
             NavigationView navigationView = findViewById(R.id.navigation);
             drawerLayout.openDrawer(navigationView);
+            mTextToSpeechEngine.speakText("help", Constants.helpId);
+        }else{
+            // No other action button in action bar
+            mTextToSpeechEngine.speakText("Insight App Logo", Constants.helpId);
         }
+
+
+
+        Log.d(TAG, "onOptionsItemSelected: " + item.getItemId());
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -106,7 +190,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         // Remove default title text
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
 
     }
 
@@ -235,5 +320,40 @@ public class MainActivity extends AppCompatActivity {
         return dm.widthPixels;
     }
 
+    /*
+     * Driver methods for Text-to-Speech Feature
+     */
+    public void handleTextRecognition(View view) {
+        mTextToSpeechEngine.speakText("Short Text", Constants.shortTextId);
+    }
 
+    /*
+     * Driver methods for Text-to-Speech Feature
+     */
+    public void handleBarCodeRecognition(View view) {
+        mTextToSpeechEngine.speakText("Bar Code", Constants.barCodeId);
+    }
+
+    /*
+     * Driver methods for Image Recognition feature Feature
+     */
+    public void handleImageRecognition(View view) {
+        mTextToSpeechEngine.speakText("Image", Constants.imageId);
+    }
+
+    /*
+     * Driver methods for Currency Recognition Feature
+     */
+    public void handleCurrencyRecognition(View view) {
+        mTextToSpeechEngine.speakText("Currency", Constants.currencyId);
+    }
+
+    /*
+     * Driver methods for Color recognition Feature
+     */
+    public void handleColorRecognition(View view) {
+        mTextToSpeechEngine.speakText("Color", Constants.colorId);
+    }
 }
+
+

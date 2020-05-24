@@ -15,21 +15,20 @@
             android:layout_height="wrap_content"
             android:elevation="4dp"
             android:theme="@style/AppTheme.ActionBar.Transparent"
-            app:menu="@menu/toolbar_items"
-            app:navigationIcon="@mipmap/ic_launcher_foreground"
-            app:titleTextColor="@color/cardview_light_background"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
-            >
+            app:menu="@menu/toolbar_items"
+            app:navigationIcon="@mipmap/ic_launcher_foreground"
+            app:titleTextColor="?android:attr/colorBackground">
+
             <TextView
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/cardview_light_background"
                 android:text="@string/app_name"
-                android:textSize="20dp"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                />
+                android:textColor="@color/cardview_light_background"
+                android:textSize="20sp" />
         </androidx.appcompat.widget.Toolbar>
 
             <FrameLayout
@@ -53,7 +52,7 @@
 
                     <LinearLayout
                         android:id="@+id/linear_layout"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
@@ -62,8 +61,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_subject_black_48"
+                            android:text="@string/short_text"
+                            android:onClick="handleTextRecognition"
 
-                            android:text="Short Text"
                             />
 
                         <Button
@@ -71,15 +71,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_barcode_80"
-                            android:text="Bar Code"
+                            android:text="@string/bar_code"
+                            android:onClick="handleBarCodeRecognition"
                              />
 
                         <Button
-                            android:id="@+id/Person"
+                            android:id="@+id/Image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/ic_image_recognition"
-                            android:text="Image"
+                            android:text="@string/image"
+                            android:onClick="handleImageRecognition"
                              />
 
                         <Button
@@ -87,7 +89,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/ic_currency"
-                            android:text="Currency"
+                            android:text="@string/currency"
+                            android:onClick="handleCurrencyRecognition"
                             />
 
                         <Button
@@ -95,7 +98,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawableTop="@drawable/baseline_opacity_black_48"
-                            android:text="Color"
+                            android:text="@string/color"
+                            android:onClick="handleColorRecognition"
                             />
                     </LinearLayout>
 

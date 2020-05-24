@@ -31,6 +31,7 @@
     <string name="short_text">Short Text</string>
     <string name="color">Color</string>
     <string name="bar_code">Bar Code</string>
+    <string name="image">image</string>
     <string name="currency">Currency</string>
     <string name="person">Person</string>
     <string name="title_activity_login">Sign in</string>
@@ -42,5 +43,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="help">Help</string>
 
 </resources>
