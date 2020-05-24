@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private TextToSpeechEngine mTextToSpeechEngine;
     private NavigationView navigationView;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean handleNavigationItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_tutorials:
                 mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
                 readTutorials();
@@ -145,13 +147,12 @@ public class MainActivity extends AppCompatActivity {
      */
     private void launchOnBoarder() {
         SharedPreferences prefs = this.getPreferences(MODE_PRIVATE);
-        if(!prefs.getBoolean(Constants.firstTime, false)) {
+        if (!prefs.getBoolean(Constants.firstTime, false)) {
             // we should run our one time code
             Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
             startActivity(intent);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(Constants.firstTime, true);
-            editor.commit();
             editor.apply();
         }
     }
@@ -184,7 +185,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         // Remove default title text
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
 
     }
 
