@@ -5,6 +5,7 @@ class Constants {
     static final int REQUEST_CODE_CAMERA_PERMISSION = 1;
 
 
+
     /* Shared preferences key for indicating first app installation*/
     static String firstTime = "first_launch";
 
@@ -21,4 +22,8 @@ class Constants {
     static String imageId = "imageId";
     static String colorId = "colorId";
     static String currencyId = "currencyId";
+
+    /* utterance ids for picture taking */
+    static String captureErrorId = "captureErrorId";
+    static String captureSuccessId = "captureSuccessId";
 }

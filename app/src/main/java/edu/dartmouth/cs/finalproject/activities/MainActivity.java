@@ -24,6 +24,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private TextToSpeechEngine mTextToSpeechEngine;
     private NavigationView navigationView;
+    private PreviewView previewLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
         navigationView = findViewById(R.id.navigation);
+
         navigationView.setNavigationItemSelectedListener(item -> handleNavigationItemSelected(item));
+        previewLayout.setOnClickListener(v -> handlePreviewLayoutClicked());
         mTextToSpeechEngine = new TextToSpeechEngine(this);
 
 
@@ -80,6 +85,42 @@ public class MainActivity extends AppCompatActivity {
             Button button = (Button) linearLayout.getChildAt(i);
             button.setWidth(width);
         }
+
+
+    }
+    /*
+     * Called whenever the user clicks the camera preview layout
+     * We take a picture and process the buffer image depending on what
+     * feature the user selects
+     */
+    private void handlePreviewLayoutClicked() {
+        Log.d(TAG, "onClick(): Preview Layout");
+        imageCapture.takePicture(ContextCompat.getMainExecutor(this), new ImageCapture.OnImageCapturedCallback() {
+
+            /*
+             * Callback for when the image has been captured.
+             * The application is responsible for calling ImageProxy.close() to close the image.
+             */
+            @Override
+            public void onCaptureSuccess(@NonNull ImageProxy image) {
+                Log.d(TAG, "onCaptureSuccess(): Captured image");
+                mTextToSpeechEngine.speakText("Processing Image. Hold on.", Constants.captureSuccessId);
+                // do some logic here passing the image to appropriate feature driver
+
+                super.onCaptureSuccess(image);
+                image.close();
+            }
+
+            /*
+             * Callback for when an error occurred during image capture.
+             */
+            @Override
+            public void onError(@NonNull ImageCaptureException exception) {
+                Log.d(TAG, "onError():" + exception.getMessage());
+                mTextToSpeechEngine.speakText("Try taking the picture again", Constants.captureErrorId);
+                super.onError(exception);
+            }
+        });
     }
 
     private boolean handleNavigationItemSelected(MenuItem item) {
@@ -208,7 +249,9 @@ public class MainActivity extends AppCompatActivity {
             return;
 
         }
-        PreviewView previewView = findViewById(R.id.preview_view);
+        previewLayout = findViewById(R.id.preview_view);
+
+
 
         ListenableFuture cameraProviderFuture =
                 ProcessCameraProvider.getInstance(this);
@@ -240,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Connect the preview use case to the previewView
                 preview.setSurfaceProvider(
-                        previewView.createSurfaceProvider(mCamera.getCameraInfo()));
+                        previewLayout.createSurfaceProvider(mCamera.getCameraInfo()));
             } catch (InterruptedException | ExecutionException e) {
                 // Currently no exceptions thrown. cameraProviderFuture.get() should
                 // not block since the listener is being called, so no need to
@@ -353,6 +396,15 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleColorRecognition(View view) {
         mTextToSpeechEngine.speakText("Color", Constants.colorId);
+    }
+
+    /*
+     * Close TextToSpeechEngine in onDestroy()
+     */
+    @Override
+    protected void onDestroy() {
+        mTextToSpeechEngine.closeTextToSpeechEngine();
+        super.onDestroy();
     }
 }
 

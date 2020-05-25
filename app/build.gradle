@@ -60,6 +60,9 @@ dependencies {
     // for IntroActivity
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
 
+    // firebase ml-vision kit
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+
 }
 
 // for firebase
