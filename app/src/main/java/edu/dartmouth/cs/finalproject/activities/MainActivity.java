@@ -1,6 +1,7 @@
 package edu.dartmouth.cs.finalproject.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
@@ -49,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private TextToSpeechEngine mTextToSpeechEngine;
     private NavigationView navigationView;
+    private PreviewView previewLayout;
+    private String currentFeature;
+
+    private TextToSpeechDriver mTextToSpeechDriver;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,11 +66,15 @@ public class MainActivity extends AppCompatActivity {
         checkPermissions();
         setUpCamera();
         setUpActionBar();
+        initialiseFeatureDrivers();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
         navigationView = findViewById(R.id.navigation);
+        previewLayout = findViewById(R.id.preview_view);
+
         navigationView.setNavigationItemSelectedListener(item -> handleNavigationItemSelected(item));
+        previewLayout.setOnClickListener(v -> handlePreviewLayoutClicked());
         mTextToSpeechEngine = new TextToSpeechEngine(this);
 
 
@@ -80,8 +91,96 @@ public class MainActivity extends AppCompatActivity {
             Button button = (Button) linearLayout.getChildAt(i);
             button.setWidth(width);
         }
+
+
     }
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        // restore the current feature across rotations
+        currentFeature = savedInstanceState.getString("currentFeature");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        // save the current feature across rotations
+        outState.putString("currentFeature", currentFeature);
+        super.onSaveInstanceState(outState);
+    }
+
+    /*
+     * creates instances of feature class drivers
+     */
+    private void initialiseFeatureDrivers() {
+        mTextToSpeechDriver = new TextToSpeechDriver(this);
+        //mBarCodeDriver = new BarCodeDriver(this);
+        //mImageDriver = new ImageDriver(this)
+    }
+
+    /*
+     * Called whenever the user clicks the camera preview layout
+     * We take a picture and process the buffer image depending on what
+     * feature the user selects
+     */
+    private void handlePreviewLayoutClicked() {
+        Log.d(TAG, "onClick(): Preview Layout");
+        imageCapture.takePicture(ContextCompat.getMainExecutor(this), new ImageCapture.OnImageCapturedCallback() {
+
+            /*
+             * Callback for when the image has been captured.
+             * The application is responsible for calling ImageProxy.close() to close the image.
+             */
+            @Override
+            public void onCaptureSuccess(@NonNull ImageProxy image) {
+                Log.d(TAG, "onCaptureSuccess(): Captured image");
+                if (currentFeature != null){
+                    mTextToSpeechEngine.speakText("Processing Image. Hold on.", Constants.captureSuccessId);
+                    featureProviderDriver(image); // determines what feature to call on the captured Image
+                }
+                image.close();
+            }
+
+            /*
+             * Callback for when an error occurred during image capture.
+             */
+            @Override
+            public void onError(@NonNull ImageCaptureException exception) {
+                Log.d(TAG, "onError():" + exception.getMessage());
+                mTextToSpeechEngine.speakText("Try taking the picture again", Constants.captureErrorId);
+                super.onError(exception);
+            }
+        });
+    }
+
+    /*
+     * Called when an image is successfully captured
+     * Determines what feature to call when picture is taken
+     */
+    @SuppressLint("UnsafeExperimentalUsageError")
+    private void featureProviderDriver(ImageProxy image) {
+        if (currentFeature == null) return;
+        switch(currentFeature){
+            case(Constants.shortTextRecognition):
+                Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
+                int rotationDegrees = image.getImageInfo().getRotationDegrees();
+                mTextToSpeechDriver.recognizeText(image,  rotationDegrees);
+                break;
+            case (Constants.imageRecognition):
+                Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
+                break;
+            case (Constants.barCodeRecognition):
+                Log.d(TAG, "featureProviderDriver: barCodeRecognitionDriver");
+                break;
+            default:
+                // could add more case blocks for more features
+                Log.d(TAG, "featureProviderDriver: unsupported Feature " + currentFeature);
+        }
+    }
+
+    /*
+     * calls methods relating to onClick events for the navigation drawer
+     */
     private boolean handleNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_tutorials:
@@ -208,7 +307,9 @@ public class MainActivity extends AppCompatActivity {
             return;
 
         }
-        PreviewView previewView = findViewById(R.id.preview_view);
+        previewLayout = findViewById(R.id.preview_view);
+
+
 
         ListenableFuture cameraProviderFuture =
                 ProcessCameraProvider.getInstance(this);
@@ -240,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Connect the preview use case to the previewView
                 preview.setSurfaceProvider(
-                        previewView.createSurfaceProvider(mCamera.getCameraInfo()));
+                        previewLayout.createSurfaceProvider(mCamera.getCameraInfo()));
             } catch (InterruptedException | ExecutionException e) {
                 // Currently no exceptions thrown. cameraProviderFuture.get() should
                 // not block since the listener is being called, so no need to
@@ -325,6 +426,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleTextRecognition(View view) {
         mTextToSpeechEngine.speakText("Short Text", Constants.shortTextId);
+        currentFeature = Constants.shortTextRecognition;
+
     }
 
     /*
@@ -332,6 +435,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleBarCodeRecognition(View view) {
         mTextToSpeechEngine.speakText("Bar Code", Constants.barCodeId);
+        currentFeature = Constants.barCodeRecognition;
     }
 
     /*
@@ -339,6 +443,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleImageRecognition(View view) {
         mTextToSpeechEngine.speakText("Image", Constants.imageId);
+        currentFeature = Constants.imageRecognition;
     }
 
     /*
@@ -346,6 +451,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleCurrencyRecognition(View view) {
         mTextToSpeechEngine.speakText("Currency", Constants.currencyId);
+        // currentFeature = Constants.currencyRecognition; // unsupported
     }
 
     /*
@@ -353,6 +459,17 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleColorRecognition(View view) {
         mTextToSpeechEngine.speakText("Color", Constants.colorId);
+        //currentFeature = Constants.colorRecognition; //unsupported
+    }
+
+    /*
+     * Close TextToSpeechEngine(s) in onDestroy()
+     */
+    @Override
+    protected void onDestroy() {
+        mTextToSpeechEngine.closeTextToSpeechEngine();
+        mTextToSpeechDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
+        super.onDestroy();
     }
 }
 

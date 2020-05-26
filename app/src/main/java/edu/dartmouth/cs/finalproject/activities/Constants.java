@@ -4,6 +4,14 @@ class Constants {
     /* Device permissions REQUEST CODE */
     static final int REQUEST_CODE_CAMERA_PERMISSION = 1;
 
+    /* Features */
+    public final static String shortTextRecognition = "shortTextRecognition";
+    public final static String imageRecognition = "imageRecognition";
+    public final static String barCodeRecognition = "barCodeRecognition";
+    public final static String currencyRecognition = "currencyRecognition";
+    public static String detectedTextId = "detectedTextId";
+
+//    public static String detectedTextId = ;
 
     /* Shared preferences key for indicating first app installation*/
     static String firstTime = "first_launch";
@@ -21,4 +29,10 @@ class Constants {
     static String imageId = "imageId";
     static String colorId = "colorId";
     static String currencyId = "currencyId";
+
+    /* utterance ids for picture taking */
+    static String captureErrorId = "captureErrorId";
+    static String captureSuccessId = "captureSuccessId";
+
+
 }

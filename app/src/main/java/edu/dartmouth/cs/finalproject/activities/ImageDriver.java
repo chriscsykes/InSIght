@@ -1,4 +1,4 @@
 package edu.dartmouth.cs.finalproject.activities;
 
-public class FacialScannerActivity {
+public class ImageDriver {
 }
