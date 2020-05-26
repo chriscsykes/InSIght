@@ -33,7 +33,7 @@ From here on out:
 
 ### Show and Tell 2:
 #### Thread Design Diagram:
-
+![](images/mvc_diagrams.png)
 
 ### Download APK
 
