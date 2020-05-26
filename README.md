@@ -2,16 +2,16 @@
 
 ## Dartmouth CS65 Final Project
 
-## Team: Sylvester Coch, Sebastian Saker, Christopher Sykes
-
 ### Project Description:
 InSight is an Android application aimed at improving the quality of life of the visually imapaired.
 Using CameraX and Google Firebase, this app helps the visually impaired by providing features like:
-
 - Firebase authentication to log users in via speech
 - Audio feedback on button presses to assist users in navigating the app
 - Firebase ML Kit's text recogintion API to recognize text and read it back to the user
 - And more...
+
+### Original Pitch
+(https://docs.google.com/presentation/d/1PjDBnxKh9KSKOLvDSTeLFw40MYGL8JayIdCbSn8xo9Q/edit?usp=sharing)
 
 ### Show and Tell 1:
 #### MVC Diagram:
