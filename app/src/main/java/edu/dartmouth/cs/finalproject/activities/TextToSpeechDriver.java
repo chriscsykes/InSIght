@@ -35,7 +35,7 @@ public class TextToSpeechDriver {
      */
     @androidx.camera.core.ExperimentalGetImage
     @SuppressLint("UnsafeExperimentalUsageError")
-    void recognizeText(ImageProxy imageProxy, int degrees) {
+    public void recognizeText(ImageProxy imageProxy, int degrees) {
         if (imageProxy == null) {
             Log.d(TAG, "imageProxy: null reference");
             return;

@@ -41,7 +41,6 @@ import java.util.concurrent.ExecutionException;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
-import edu.dartmouth.cs.finalproject.activities.TextToSpeechDriver;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,12 +94,28 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        // restore the current feature across rotations
+        currentFeature = savedInstanceState.getString("currentFeature");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        // save the current feature across rotations
+        outState.putString("currentFeature", currentFeature);
+        super.onSaveInstanceState(outState);
+    }
+
     /*
      * creates instances of feature class drivers
      */
     private void initialiseFeatureDrivers() {
         mTextToSpeechDriver = new TextToSpeechDriver(this);
         //mBarCodeDriver = new BarCodeDriver(this);
+        //mImageDriver = new ImageDriver(this)
     }
 
     /*
@@ -148,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
         switch(currentFeature){
             case(Constants.shortTextRecognition):
                 Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
-                mTextToSpeechDriver.recognizeText(image, imageCapture.getTargetRotation());
+                int rotationDegrees = image.getImageInfo().getRotationDegrees();
+                mTextToSpeechDriver.recognizeText(image,  rotationDegrees);
                 break;
             case (Constants.imageRecognition):
                 Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
@@ -162,6 +178,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * calls methods relating to onClick events for the navigation drawer
+     */
     private boolean handleNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_tutorials:
