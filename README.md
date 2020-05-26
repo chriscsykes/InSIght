@@ -11,7 +11,7 @@ Using CameraX and Google Firebase, this app helps the visually impaired by provi
 - And more...
 
 ### Original Pitch
-(https://docs.google.com/presentation/d/1PjDBnxKh9KSKOLvDSTeLFw40MYGL8JayIdCbSn8xo9Q/edit?usp=sharing)
+![](https://docs.google.com/presentation/d/1PjDBnxKh9KSKOLvDSTeLFw40MYGL8JayIdCbSn8xo9Q/edit?usp=sharing)
 
 ### Show and Tell 1:
 #### MVC Diagram:
