@@ -15,6 +15,7 @@ Using CameraX and Google Firebase, this app helps the visually impaired by provi
 
 ### Show and Tell 1:
 #### MVC Diagram:
+![](images/mvc_diagram.png)
 
 #### Who Is Doing What:
 So far:
@@ -33,7 +34,7 @@ From here on out:
 
 ### Show and Tell 2:
 #### Thread Design Diagram:
-![](images/mvc_diagrams.png)
+
 
 ### Download APK
 
