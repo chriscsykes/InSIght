@@ -1,6 +1,7 @@
 package edu.dartmouth.cs.finalproject.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +41,7 @@ import java.util.concurrent.ExecutionException;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
+import edu.dartmouth.cs.finalproject.activities.TextToSpeechDriver;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private TextToSpeechEngine mTextToSpeechEngine;
     private NavigationView navigationView;
     private PreviewView previewLayout;
+    private String currentFeature;
+
+    private TextToSpeechDriver mTextToSpeechDriver;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,10 +67,12 @@ public class MainActivity extends AppCompatActivity {
         checkPermissions();
         setUpCamera();
         setUpActionBar();
+        initialiseFeatureDrivers();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
         navigationView = findViewById(R.id.navigation);
+        previewLayout = findViewById(R.id.preview_view);
 
         navigationView.setNavigationItemSelectedListener(item -> handleNavigationItemSelected(item));
         previewLayout.setOnClickListener(v -> handlePreviewLayoutClicked());
@@ -89,6 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
     /*
+     * creates instances of feature class drivers
+     */
+    private void initialiseFeatureDrivers() {
+        mTextToSpeechDriver = new TextToSpeechDriver(this);
+        //mBarCodeDriver = new BarCodeDriver(this);
+    }
+
+    /*
      * Called whenever the user clicks the camera preview layout
      * We take a picture and process the buffer image depending on what
      * feature the user selects
@@ -104,10 +119,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCaptureSuccess(@NonNull ImageProxy image) {
                 Log.d(TAG, "onCaptureSuccess(): Captured image");
-                mTextToSpeechEngine.speakText("Processing Image. Hold on.", Constants.captureSuccessId);
-                // do some logic here passing the image to appropriate feature driver
-
-                super.onCaptureSuccess(image);
+                if (currentFeature != null){
+                    mTextToSpeechEngine.speakText("Processing Image. Hold on.", Constants.captureSuccessId);
+                    featureProviderDriver(image); // determines what feature to call on the captured Image
+                }
                 image.close();
             }
 
@@ -121,6 +136,30 @@ public class MainActivity extends AppCompatActivity {
                 super.onError(exception);
             }
         });
+    }
+
+    /*
+     * Called when an image is successfully captured
+     * Determines what feature to call when picture is taken
+     */
+    @SuppressLint("UnsafeExperimentalUsageError")
+    private void featureProviderDriver(ImageProxy image) {
+        if (currentFeature == null) return;
+        switch(currentFeature){
+            case(Constants.shortTextRecognition):
+                Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
+                mTextToSpeechDriver.recognizeText(image, imageCapture.getTargetRotation());
+                break;
+            case (Constants.imageRecognition):
+                Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
+                break;
+            case (Constants.barCodeRecognition):
+                Log.d(TAG, "featureProviderDriver: barCodeRecognitionDriver");
+                break;
+            default:
+                // could add more case blocks for more features
+                Log.d(TAG, "featureProviderDriver: unsupported Feature " + currentFeature);
+        }
     }
 
     private boolean handleNavigationItemSelected(MenuItem item) {
@@ -368,6 +407,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleTextRecognition(View view) {
         mTextToSpeechEngine.speakText("Short Text", Constants.shortTextId);
+        currentFeature = Constants.shortTextRecognition;
+
     }
 
     /*
@@ -375,6 +416,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleBarCodeRecognition(View view) {
         mTextToSpeechEngine.speakText("Bar Code", Constants.barCodeId);
+        currentFeature = Constants.barCodeRecognition;
     }
 
     /*
@@ -382,6 +424,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleImageRecognition(View view) {
         mTextToSpeechEngine.speakText("Image", Constants.imageId);
+        currentFeature = Constants.imageRecognition;
     }
 
     /*
@@ -389,6 +432,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleCurrencyRecognition(View view) {
         mTextToSpeechEngine.speakText("Currency", Constants.currencyId);
+        // currentFeature = Constants.currencyRecognition; // unsupported
     }
 
     /*
@@ -396,14 +440,16 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleColorRecognition(View view) {
         mTextToSpeechEngine.speakText("Color", Constants.colorId);
+        //currentFeature = Constants.colorRecognition; //unsupported
     }
 
     /*
-     * Close TextToSpeechEngine in onDestroy()
+     * Close TextToSpeechEngine(s) in onDestroy()
      */
     @Override
     protected void onDestroy() {
         mTextToSpeechEngine.closeTextToSpeechEngine();
+        mTextToSpeechDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
         super.onDestroy();
     }
 }
