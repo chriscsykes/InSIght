@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
             // we should run our one time code
             Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
             startActivity(intent);
+
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(Constants.firstTime, true);
             editor.apply();

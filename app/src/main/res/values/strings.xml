@@ -44,5 +44,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="help">Help</string>
+    <string name="your_name_here">Your name here</string>
+    <string name="logo_for_insight_app">logo for insight app</string>
 
 </resources>
