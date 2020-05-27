@@ -36,6 +36,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.ExecutionException;
 
@@ -55,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
     private PreviewView previewLayout;
     private String currentFeature;
 
+    // firebase stuff
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private DatabaseReference mDatabase;
+
     private TextToSpeechDriver mTextToSpeechDriver;
 
     @Override
@@ -67,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
         setUpCamera();
         setUpActionBar();
         initialiseFeatureDrivers();
+
+        // from example in class:
+        // Initialize Firebase Auth and Database Reference
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
