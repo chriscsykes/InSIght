@@ -2,15 +2,30 @@ package edu.dartmouth.cs.finalproject.activities.data.model;
 
 public class User {
 
+    private String userID;
     private String username;
     private int phoneNumber;
-    private FeatureHistory featureHistory;
+    private int textToSpeechCount;
+    private int imageRecognitionCount;
 
+    public User() {
 
-    public User(String username, int phoneNumber, FeatureHistory featureHistory) {
+    }
+
+    public User(String userID, String username, int phoneNumber, int textToSpeechCount, int imageRecognitionCount) {
+        this.userID = userID;
         this.username = username;
         this.phoneNumber = phoneNumber;
-        this.featureHistory = featureHistory;
+        this.imageRecognitionCount = imageRecognitionCount;
+        this.textToSpeechCount = textToSpeechCount;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getUsername() {
@@ -29,11 +44,19 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public FeatureHistory getFeatureHistory() {
-        return featureHistory;
+    public int getImageRecognitionCount() {
+        return imageRecognitionCount;
     }
 
-    public void setFeatureHistory(FeatureHistory featureHistory) {
-        this.featureHistory = featureHistory;
+    public void setImageRecognitionCount(int imageRecognitionCount) {
+        this.imageRecognitionCount = imageRecognitionCount;
+    }
+
+    public int getTextToSpeechCount() {
+        return textToSpeechCount;
+    }
+
+    public void setTextToSpeechCount(int textToSpeechCount) {
+        this.textToSpeechCount = textToSpeechCount;
     }
 }
