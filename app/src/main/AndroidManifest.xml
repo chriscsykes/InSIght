@@ -11,20 +11,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         <activity
-            android:name=".activities.ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-
+            android:name=".activities.ReadTutorialsActivity"
+            android:label="@string/title_activity_read_tutorials"
+            android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name=".activities.AboutActivity"
+            android:label="@string/title_activity_about2"
+            android:theme="@style/NoActionBar" /> <!-- <activity -->
+        <!-- android:name=".activities.ui.login.LoginActivity" -->
+        <!-- android:label="@string/title_activity_login"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity android:name=".activities.MainActivity">
-
         </activity>
         <activity android:name=".activities.IntroActivity" />
     </application>

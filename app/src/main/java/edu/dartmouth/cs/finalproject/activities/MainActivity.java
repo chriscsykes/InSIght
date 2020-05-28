@@ -226,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
      * Sends user to Insight homePage
      */
     private void learnAboutInsight() {
+        Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+        startActivity(intent);
     }
 
     /*

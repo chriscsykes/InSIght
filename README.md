@@ -6,7 +6,7 @@
 InSight is an Android application aimed at improving the quality of life of the visually imapaired.
 Using CameraX and Google Firebase, this app helps the visually impaired by providing features like:
 - Using Firebase authentication to log users in via speech
-- Providing audio feedback on button presses using Google's text to speech enging
+- Providing audio feedback on button presses using Google's text to speech engine
 - Using Firebase ML Kit's text recogintion API to recognize text and read it back to the user
 - And more...
 
