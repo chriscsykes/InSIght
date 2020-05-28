@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -214,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
      * Allows the user to send feedback to developers
      */
     private void provideFeedBack() {
+        // opens the browser to our google form
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/qoVPUMTdajwM7GLM9"));
+        startActivity(browserIntent);
     }
 
     /*
