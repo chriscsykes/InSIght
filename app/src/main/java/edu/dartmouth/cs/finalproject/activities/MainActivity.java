@@ -240,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
      * Probably takes User them to website tutorials/ onBoarder Screen
      */
     private void readTutorials() {
+        Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
+        startActivity(intent);
     }
 
     /*

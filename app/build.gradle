@@ -66,6 +66,8 @@ dependencies {
     // firebase ml-vision kit
     implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
 }
 
 // for firebase

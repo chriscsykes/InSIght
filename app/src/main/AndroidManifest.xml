@@ -11,10 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity
-            android:name=".activities.ReadTutorialsActivity"
-            android:label="@string/title_activity_read_tutorials"
-            android:theme="@style/NoActionBar"></activity>
+
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about2"
@@ -34,6 +31,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.IntroActivity" />
+        <activity
+            android:name=".activities.ReadTutorialsActivity"
+            android:label="@string/title_activity_read_tutorials"
+            android:theme="@style/NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -67,5 +67,14 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_read_tutorials">ReadTutorialsActivity</string>
+    <string name="about_insight_title">About InSight</string>
+
+
+    <string name="read_tutorials_title">Tutorial</string>
+    <string name="tutorial_title">How to Use InSight</string>
+    <string name="description1">Open the app, and spell out your name when prompted to.</string>
+    <string name="description2">Once logged in, swipe the bottom of the screen and press down to determine which feature you are on. </string>
+    <string name="description3">Once you have selected the desired feature, position the camera appropriately and tap the screen to begin. Hold the phone steady while the camera takes in the image to be processed. </string>
+    <string name="description4">To call for support, listen to the tutorial, provide feedback, learn more about InSight, or share this app with a friend, swipe inward from the right edge of the screen, or press the help button in the top right corner of screen to access the navigation view.</string>
 
 </resources>

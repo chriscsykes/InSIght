@@ -29,13 +29,13 @@ public class AboutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("About InSight");
+        getSupportActionBar().setTitle(R.string.about_insight_title);
 
 
         mTextToSpeechDriver = new TextToSpeechDriver(this);
         mTextToSpeechEngine = new TextToSpeechEngine(this);
 
-        mTextToSpeechEngine.speakText("Touch screen to learn more about insight", Constants.aboutInsightId);
+        // mTextToSpeechEngine.speakText("Touch screen to learn more about insight", Constants.aboutInsightId);
 
     }
 
