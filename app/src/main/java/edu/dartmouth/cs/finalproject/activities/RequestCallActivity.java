@@ -25,6 +25,7 @@ public class RequestCallActivity extends AppCompatActivity {
 
     private static final int REQUEST_CALL = 1;
     private EditText mEditTextNum;
+    private static final String NUM_TO_CALL = "8089839872";
 
     private TextToSpeechEngine mTextToSpeechEngine;
     private TextToSpeechDriver mTextToSpeechDriver;
@@ -48,6 +49,9 @@ public class RequestCallActivity extends AppCompatActivity {
         mEditTextNum = findViewById(R.id.edit_text_number);
         ImageView imageCall = findViewById(R.id.image_call);
 
+        // set the predetermined phone number to call for help
+        mEditTextNum.setText(NUM_TO_CALL);
+
         // when the phone image is pressed
         imageCall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,24 +61,16 @@ public class RequestCallActivity extends AppCompatActivity {
         });
     }
 
+    // checks for permission and sets up call
     private void makePhoneCall() {
-        String numToCall = mEditTextNum.getText().toString();
-
-        // make sure a number was entered
-        if (numToCall.trim().length() > 0) {
-            // check for permission
-            if (ContextCompat.checkSelfPermission(RequestCallActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(RequestCallActivity.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-            }
-            else {
-                // make the actual phone call
-                String dial = "tel:" + numToCall;
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(dial));
-                startActivity(intent);
-            }
+        if (ContextCompat.checkSelfPermission(RequestCallActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(RequestCallActivity.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
         else {
-            Toast.makeText(RequestCallActivity.this, R.string.enter_phone_number, Toast.LENGTH_SHORT).show();
+            // make the actual phone call
+            String dial = "tel:" + NUM_TO_CALL;
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(dial));
+            startActivity(intent);
         }
     }
 
