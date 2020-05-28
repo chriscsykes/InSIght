@@ -218,9 +218,43 @@ public class MainActivity extends AppCompatActivity {
 
     /*
      * Allows the user to share the app with friends
+     * TODO
      */
     private void shareWithFriends() {
     }
+//    /*
+//     * helper method to compose SMS message with
+//     */
+//    public void composeSmsMessage(String message) {
+//        Intent intent = new Intent(Intent.ACTION_SENDTO);
+//        intent.setType(HTTP.PLAIN_TEXT_TYPE);
+//        intent.putExtra("sms_body", message);
+//        intent.putExtra(Intent.EXTRA_STREAM, attachment);
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        }
+//    }
+    /*
+     * checks permission for sms message
+     * TODO
+     */
+//    private void checkForSmsPermission() {
+//        if (ActivityCompat.checkSelfPermission(this,
+//                Manifest.permission.SEND_SMS) !=
+//                PackageManager.PERMISSION_GRANTED) {
+//            Log.d(TAG, getString(R.string.permission_not_granted));
+//            // Permission not yet granted. Use requestPermissions().
+//            // MY_PERMISSIONS_REQUEST_SEND_SMS is an
+//            // app-defined int constant. The callback method gets the
+//            // result of the request.
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.SEND_SMS},
+//                    MY_PERMISSIONS_REQUEST_SEND_SMS);
+//        } else {
+//            // Permission already granted. Enable the SMS button.
+//            enableSmsButton();
+//        }
+//    }
 
     /*
      * Sends user to Insight homePage

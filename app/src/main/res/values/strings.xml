@@ -46,5 +46,8 @@
     <string name="help">Help</string>
     <string name="your_name_here">Your name here</string>
     <string name="logo_for_insight_app">logo for insight app</string>
+    <string name="skip_slide">Skip Slide</string>
+    <string name="done">Done</string>
+    <string name="next_slide">Next Slide</string>
 
 </resources>

@@ -30,7 +30,6 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import edu.dartmouth.cs.finalproject.R;
-import edu.dartmouth.cs.finalproject.activities.TextToSpeechActivity;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 import edu.dartmouth.cs.finalproject.activities.ui.login.LoginViewModel;
 import edu.dartmouth.cs.finalproject.activities.ui.login.LoginViewModelFactory;
