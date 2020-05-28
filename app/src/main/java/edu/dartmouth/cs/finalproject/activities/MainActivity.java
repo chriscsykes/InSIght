@@ -238,6 +238,8 @@ public class MainActivity extends AppCompatActivity {
      * Allows the user to make a call to request for assistance
      */
     private void requestCall() {
+        Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
+        startActivity(intent);
     }
 
     /*

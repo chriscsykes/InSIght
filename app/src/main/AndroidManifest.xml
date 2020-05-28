@@ -3,6 +3,7 @@
     package="edu.dartmouth.cs.finalproject">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
+        <activity android:name=".activities.RequestCallActivity"></activity>
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about2"
@@ -34,7 +35,7 @@
         <activity
             android:name=".activities.ReadTutorialsActivity"
             android:label="@string/title_activity_read_tutorials"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
     </application>
 
 </manifest>

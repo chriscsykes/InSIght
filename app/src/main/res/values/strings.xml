@@ -76,5 +76,7 @@
     <string name="description2">Once logged in, swipe the bottom of the screen and press down to determine which feature you are on. </string>
     <string name="description3">Once you have selected the desired feature, position the camera appropriately and tap the screen to begin. Hold the phone steady while the camera takes in the image to be processed. </string>
     <string name="description4">To call for support, listen to the tutorial, provide feedback, learn more about InSight, or share this app with a friend, swipe inward from the right edge of the screen, or press the help button in the top right corner of screen to access the navigation view.</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="phone_call_permission_denied">Permission Denied</string>
 
 </resources>
