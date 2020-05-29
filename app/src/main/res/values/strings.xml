@@ -83,5 +83,6 @@
     <string name="enter_phone_number">Enter Phone Number</string>
     <string name="phone_call_permission_denied">Permission Denied</string>
     <string name="voice_recognition_picture">picture of voice recognition</string>
+    <string name="call_button">call button</string>
 
 </resources>

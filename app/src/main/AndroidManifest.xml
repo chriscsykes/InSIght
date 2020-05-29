@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.RequestCallActivity"></activity>
+        <activity android:name=".activities.RequestCallActivity" />
 <!--        Uncomment to include LoginIn Activity-->
 <!--        <activity-->
 <!--            android:name=".activities.ui.login.LoginActivity"-->
@@ -26,13 +26,14 @@
 <!--            </intent-filter>-->
 
 <!--        </activity>-->
-        <activity android:name=".activities.AboutActivity">
+        <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about2"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar" >
         </activity>
 
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
