@@ -49,5 +49,6 @@
     <string name="skip_slide">Skip Slide</string>
     <string name="done">Done</string>
     <string name="next_slide">Next Slide</string>
+    <string name="share_message">Hey! Check out this amazing app called InSight. https://chriscsykes.github.io/InSight/ </string>
 
 </resources>

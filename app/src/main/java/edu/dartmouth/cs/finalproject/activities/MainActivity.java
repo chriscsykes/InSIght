@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -218,22 +219,25 @@ public class MainActivity extends AppCompatActivity {
 
     /*
      * Allows the user to share the app with friends
-     * TODO
+     *
      */
     private void shareWithFriends() {
+        String message = getString(R.string.share_message);
+        composeSmsMessage(message);
     }
-//    /*
-//     * helper method to compose SMS message with
-//     */
-//    public void composeSmsMessage(String message) {
-//        Intent intent = new Intent(Intent.ACTION_SENDTO);
-//        intent.setType(HTTP.PLAIN_TEXT_TYPE);
-//        intent.putExtra("sms_body", message);
-//        intent.putExtra(Intent.EXTRA_STREAM, attachment);
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivity(intent);
-//        }
-//    }
+
+    /*
+     * helper method to compose SMS message with
+     */
+    public void composeSmsMessage(String message) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("text/plain");
+        intent.setData(Uri.parse("smsto:"));
+        intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
     /*
      * checks permission for sms message
      * TODO
