@@ -45,7 +45,7 @@ import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getName();
     private ImageCapture imageCapture;
     private Camera mCamera;
     private DrawerLayout drawerLayout;
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        launchOnBoarder();
         checkPermissions();
+        launchOnBoarder();
         setUpCamera();
         setUpActionBar();
         initialiseFeatureDrivers();
@@ -241,27 +241,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    /*
-     * checks permission for sms message
-     * TODO
-     */
-//    private void checkForSmsPermission() {
-//        if (ActivityCompat.checkSelfPermission(this,
-//                Manifest.permission.SEND_SMS) !=
-//                PackageManager.PERMISSION_GRANTED) {
-//            Log.d(TAG, getString(R.string.permission_not_granted));
-//            // Permission not yet granted. Use requestPermissions().
-//            // MY_PERMISSIONS_REQUEST_SEND_SMS is an
-//            // app-defined int constant. The callback method gets the
-//            // result of the request.
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.SEND_SMS},
-//                    MY_PERMISSIONS_REQUEST_SEND_SMS);
-//        } else {
-//            // Permission already granted. Enable the SMS button.
-//            enableSmsButton();
-//        }
-//    }
 
     /*
      * Sends user to Insight homePage
@@ -269,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
     private void learnAboutInsight() {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     /*
@@ -277,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
     private void requestCall() {
         Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     /*
@@ -285,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
     private void readTutorials() {
         Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     /*

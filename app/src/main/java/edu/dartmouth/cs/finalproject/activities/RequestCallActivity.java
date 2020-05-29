@@ -107,7 +107,7 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             mTextToSpeechEngine.setLanguage(Locale.UK);
-//            readTutorials();
+//            readCallGuide();
             Log.d(TAG, "onInit: okay");
         }
     }
