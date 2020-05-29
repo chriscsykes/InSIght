@@ -47,4 +47,36 @@
     <string name="your_name_here">Your name here</string>
     <string name="logo_for_insight_app">logo for insight app</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_paragraph">InSight is an Android application aimed at improving the quality of life of the visually impaired. Using CameraX and Google Firebase, this app helps the visually impaired by providing features like:</string>
+    <string name="creators_paragraph">Created by Sylvester Coch, Sebastian Saker, and Christopher Sykes</string>
+    <string name="credits_paragraph">Icon made by Icongeek26 from www.flaticon.com.</string>
+    <string name="features_paragraph">- Firebase authentication via speech \n \n
+    - Audio feedback on button presses using Google\'s text to speech engine \n \n
+    - Text recognition for short texts and documents using Firebase ML Kit\'s text recognition API \n \n
+    - And more</string>
+    <string name="contact_info_paragraph">For more info please visit https://github.com/chriscsykes/InSight or email us at InSightApp@gmail.com</string>
+    <string name="title_activity_about2">AboutActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_read_tutorials">ReadTutorialsActivity</string>
+    <string name="about_insight_title">About InSight</string>
+
+
+    <string name="read_tutorials_title">Tutorial</string>
+    <string name="tutorial_title">How to Use InSight</string>
+    <string name="description1">Open the app, and spell out your name when prompted to.</string>
+    <string name="description2">Once logged in, swipe the bottom of the screen and press down to determine which feature you are on. </string>
+    <string name="description3">Once you have selected the desired feature, position the camera appropriately and tap the screen to begin. Hold the phone steady while the camera takes in the image to be processed. </string>
+    <string name="description4">To call for support, listen to the tutorial, provide feedback, learn more about InSight, or share this app with a friend, swipe inward from the right edge of the screen, or press the help button in the top right corner of screen to access the navigation view.</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="phone_call_permission_denied">Permission Denied</string>
+
 </resources>
