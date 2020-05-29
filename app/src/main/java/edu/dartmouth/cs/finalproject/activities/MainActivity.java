@@ -215,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
      * Allows the user to send feedback to developers
      */
     private void provideFeedBack() {
+        // opens the browser to our google form
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/qoVPUMTdajwM7GLM9"));
+        startActivity(browserIntent);
     }
 
     /*
@@ -264,18 +267,24 @@ public class MainActivity extends AppCompatActivity {
      * Sends user to Insight homePage
      */
     private void learnAboutInsight() {
+        Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+        startActivity(intent);
     }
 
     /*
      * Allows the user to make a call to request for assistance
      */
     private void requestCall() {
+        Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
+        startActivity(intent);
     }
 
     /*
      * Probably takes User them to website tutorials/ onBoarder Screen
      */
     private void readTutorials() {
+        Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
+        startActivity(intent);
     }
 
     /*
