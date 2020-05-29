@@ -1,34 +1,37 @@
 package edu.dartmouth.cs.finalproject.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import java.util.Locale;
+
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 
-public class RequestCallActivity extends AppCompatActivity {
+public class RequestCallActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private static final int REQUEST_CALL = 1;
+    private static final String TAG = ReadTutorialsActivity.class.getName();
     private EditText mEditTextNum;
     private static final String NUM_TO_CALL = "8089839872";
 
     private TextToSpeechEngine mTextToSpeechEngine;
-    private TextToSpeechDriver mTextToSpeechDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,7 @@ public class RequestCallActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Request a Call");
 
-        mTextToSpeechDriver = new TextToSpeechDriver(this);
-        mTextToSpeechEngine = new TextToSpeechEngine(this);
+        mTextToSpeechEngine = new TextToSpeechEngine(this, this);
 
         // get references to EditText and ImageView
         mEditTextNum = findViewById(R.id.edit_text_number);
@@ -94,9 +96,19 @@ public class RequestCallActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
-//            finish(); // close this activity and return to preview activity (if there is any)
+            finish(); // close this activity and return to preview activity (if there is any)
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            mTextToSpeechEngine.setLanguage(Locale.UK);
+//            readCallGuide();
+            Log.d(TAG, "onInit: okay");
+        }
     }
 }

@@ -46,6 +46,10 @@
     <string name="help">Help</string>
     <string name="your_name_here">Your name here</string>
     <string name="logo_for_insight_app">logo for insight app</string>
+    <string name="skip_slide">Skip Slide</string>
+    <string name="done">Done</string>
+    <string name="next_slide">Next Slide</string>
+    <string name="share_message">Hey! Check out this amazing app called InSight. https://chriscsykes.github.io/InSight/ </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -78,5 +82,7 @@
     <string name="description4">To call for support, listen to the tutorial, provide feedback, learn more about InSight, or share this app with a friend, swipe inward from the right edge of the screen, or press the help button in the top right corner of screen to access the navigation view.</string>
     <string name="enter_phone_number">Enter Phone Number</string>
     <string name="phone_call_permission_denied">Permission Denied</string>
+    <string name="voice_recognition_picture">picture of voice recognition</string>
+    <string name="call_button">call button</string>
 
 </resources>

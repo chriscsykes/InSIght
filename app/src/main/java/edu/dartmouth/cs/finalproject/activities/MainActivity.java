@@ -45,7 +45,7 @@ import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getName();
     private ImageCapture imageCapture;
     private Camera mCamera;
     private DrawerLayout drawerLayout;
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        launchOnBoarder();
         checkPermissions();
+        launchOnBoarder();
         setUpCamera();
         setUpActionBar();
         initialiseFeatureDrivers();
@@ -222,8 +222,24 @@ public class MainActivity extends AppCompatActivity {
 
     /*
      * Allows the user to share the app with friends
+     *
      */
     private void shareWithFriends() {
+        String message = getString(R.string.share_message);
+        composeSmsMessage(message);
+    }
+
+    /*
+     * helper method to compose SMS message with
+     */
+    public void composeSmsMessage(String message) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("text/plain");
+        intent.setData(Uri.parse("smsto:"));
+        intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     /*
@@ -232,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
     private void learnAboutInsight() {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     /*
@@ -240,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
     private void requestCall() {
         Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     /*
@@ -248,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
     private void readTutorials() {
         Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
         startActivity(intent);
+//        finish();
     }
 
     /*

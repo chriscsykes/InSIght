@@ -1,14 +1,16 @@
 package edu.dartmouth.cs.finalproject.activities.audio;
+
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 import java.util.Locale;
 
-public class TextToSpeechEngine {
+public class TextToSpeechEngine{
     private static final String TAG = TextToSpeechEngine.class.getName();
     private TextToSpeech mTextToSpeech;
 
+    /* default constructor for basic onInitListener */
     public TextToSpeechEngine(Context context){
         mTextToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
@@ -23,6 +25,14 @@ public class TextToSpeechEngine {
                 }
             }
         });
+    }
+
+    /*
+    * Custom Text-to-Speech constructor with custom onInitListener
+    * the context will have to implement a custom listener
+    */
+    public TextToSpeechEngine(Context context, TextToSpeech.OnInitListener listener){
+        mTextToSpeech = new TextToSpeech(context, listener);
     }
 
     /*
@@ -49,13 +59,12 @@ public class TextToSpeechEngine {
      * Tries to change the language of the textToSpeechEngine
      * if language is supported, else return false
      */
-    public boolean changeLanguage(Locale newLanguage){
+    public void setLanguage(Locale newLanguage){
         if (mTextToSpeech.isLanguageAvailable(newLanguage) == TextToSpeech.LANG_AVAILABLE){
             mTextToSpeech.setLanguage(newLanguage);
-            return true;
         }else{
-            Log.d(TAG, "changeLanguage: " + newLanguage.getDisplayLanguage() +" is not supported");
-            return false;
+            Log.d(TAG, "changeLanguage: " + newLanguage.getDisplayLanguage() +" is not supported, using default: English (UK)");
+            mTextToSpeech.setLanguage(Locale.UK);
         }
     }
     /*

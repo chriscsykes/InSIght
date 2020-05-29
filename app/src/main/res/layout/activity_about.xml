@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -129,7 +128,8 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contact_info"
-            app:srcCompat="@drawable/app_logo" />
+            app:srcCompat="@drawable/app_logo"
+            android:contentDescription="@string/logo_for_insight_app"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

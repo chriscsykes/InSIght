@@ -3,6 +3,7 @@
     package="edu.dartmouth.cs.finalproject">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -12,23 +13,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.RequestCallActivity"></activity>
+        <activity android:name=".activities.RequestCallActivity" />
+<!--        Uncomment to include LoginIn Activity-->
+<!--        <activity-->
+<!--            android:name=".activities.ui.login.LoginActivity"-->
+<!--            android:label="@string/title_activity_login">-->
+
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+<!--        </activity>-->
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about2"
-            android:theme="@style/NoActionBar" /> <!-- <activity -->
-        <!-- android:name=".activities.ui.login.LoginActivity" -->
-        <!-- android:label="@string/title_activity_login"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
-        <activity android:name=".activities.MainActivity">
+            android:theme="@style/NoActionBar" >
+        </activity>
+
+        <activity android:name=".activities.MainActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.IntroActivity" />
