@@ -54,13 +54,6 @@ public class TextToSpeechDriver {
         // Grab image rotation
         int rotation = degreesToFirebaseRotation(degrees);
 
-        // required: without this line you cant use <image> from <imageProxy>
-        /**
-         * issue with cameraX
-         * {@link 'https://issuetracker.google.com/issues/153249512'
-         */
-        mediaImage.getPlanes()[0].getBuffer().rewind();
-
         // Create a FirebaseVisionImage object from image
         FirebaseVisionImage image = FirebaseVisionImage.fromMediaImage(mediaImage, rotation);
 

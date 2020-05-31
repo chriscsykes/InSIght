@@ -55,13 +55,6 @@ public class ImageDriver {
         // Grab image rotation
         int rotation = degreesToFirebaseRotation(degrees);
 
-        // required: without this line you cant use <image> from <imageProxy>
-        /**
-         * issue with cameraX
-         * {@link 'https://issuetracker.google.com/issues/153249512'
-         */
-        mediaImage.getPlanes()[0].getBuffer().rewind();
-
         // set label detector options
         FirebaseVisionOnDeviceImageLabelerOptions options =
                 new FirebaseVisionOnDeviceImageLabelerOptions.Builder()
@@ -94,6 +87,7 @@ public class ImageDriver {
                                             for (FirebaseVisionImageLabel label : labels) {
                                                 text += label.getText() + " ";
                                             }
+                                            // we can edit this
                                             String audio = "This image contains the following items. " + text;
                                             Log.d(TAG, "onSuccess: " + audio);
                                             mTextToSpeechEngine.speakText(audio, Constants.detectedLabelId);

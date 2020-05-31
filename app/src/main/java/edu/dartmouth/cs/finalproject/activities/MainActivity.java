@@ -504,6 +504,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         mTextToSpeechEngine.closeTextToSpeechEngine();
         mTextToSpeechDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
+        mImageDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
         super.onDestroy();
     }
 }
