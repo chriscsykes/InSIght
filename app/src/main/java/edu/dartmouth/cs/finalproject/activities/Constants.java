@@ -1,6 +1,6 @@
 package edu.dartmouth.cs.finalproject.activities;
 
-class Constants {
+public class Constants {
     /* Device permissions REQUEST CODE */
     static final int REQUEST_CODE_CAMERA_PERMISSION = 1;
 
@@ -10,6 +10,7 @@ class Constants {
     public final static String barCodeRecognition = "barCodeRecognition";
     public final static String currencyRecognition = "currencyRecognition";
     public static String detectedTextId = "detectedTextId";
+    public static String detectedLabelId = "detectedLabelId";
 
 //    public static String detectedTextId = ;
 

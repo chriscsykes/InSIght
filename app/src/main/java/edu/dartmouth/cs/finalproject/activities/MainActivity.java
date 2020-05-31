@@ -42,6 +42,8 @@ import java.util.concurrent.ExecutionException;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
+import edu.dartmouth.cs.finalproject.activities.drivers.ImageDriver;
+import edu.dartmouth.cs.finalproject.activities.drivers.TextToSpeechDriver;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private String currentFeature;
 
     private TextToSpeechDriver mTextToSpeechDriver;
+    private ImageDriver mImageDriver;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     private void initialiseFeatureDrivers() {
         mTextToSpeechDriver = new TextToSpeechDriver(this);
         //mBarCodeDriver = new BarCodeDriver(this);
-        //mImageDriver = new ImageDriver(this)
+        mImageDriver = new ImageDriver(this);
     }
 
     /*
@@ -169,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case (Constants.imageRecognition):
                 Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
+                rotationDegrees = image.getImageInfo().getRotationDegrees();
+                mImageDriver.labelImages(image,  rotationDegrees);
                 break;
             case (Constants.barCodeRecognition):
                 Log.d(TAG, "featureProviderDriver: barCodeRecognitionDriver");
@@ -371,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Connect the preview use case to the previewView
                 preview.setSurfaceProvider(
-                        previewLayout.createSurfaceProvider(mCamera.getCameraInfo()));
+                        previewLayout.createSurfaceProvider());
             } catch (InterruptedException | ExecutionException e) {
                 // Currently no exceptions thrown. cameraProviderFuture.get() should
                 // not block since the listener is being called, so no need to
