@@ -34,5 +34,7 @@ public class Constants {
     public static String captureErrorId = "captureErrorId";
     public static String captureSuccessId = "captureSuccessId";
 
-
+    /* For Navigation intents */
+    public static final String SOURCE = "SOURCE";
+    public static String MAIN_ACTIVITY = "MAIN_ACTIVITY";
 }

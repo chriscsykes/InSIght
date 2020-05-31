@@ -113,7 +113,7 @@ public class ImageDriver {
      */
     @androidx.camera.core.ExperimentalGetImage
     @SuppressLint("UnsafeExperimentalUsageError")
-    private void labelImagesCloud(ImageProxy imageProxy, int degrees) {
+    public void labelImagesCloud(ImageProxy imageProxy, int degrees) {
         if (imageProxy == null) {
             Log.d(TAG, "imageProxy: null reference");
             return;
@@ -160,6 +160,8 @@ public class ImageDriver {
                                                 text.append(label.getText()).append(" ");
                                             }
                                             String audio = "This image contains the following items. " + text;
+                                            Log.d(TAG, "onSuccess: " + audio);
+
                                             mTextToSpeechEngine.speakText(audio, Constants.detectedLabelId);
                                         }
                                     }

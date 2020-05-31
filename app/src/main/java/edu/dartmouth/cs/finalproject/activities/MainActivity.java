@@ -170,11 +170,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
                 int rotationDegrees = image.getImageInfo().getRotationDegrees();
                 mTextToSpeechDriver.recognizeText(image,  rotationDegrees);
+                //mTextToSpeechDriver.recognizeText(image,  rotationDegrees); // cloud Api
                 break;
             case (Constants.imageRecognition):
                 Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
                 rotationDegrees = image.getImageInfo().getRotationDegrees();
-                mImageDriver.labelImages(image,  rotationDegrees);
+                mImageDriver.labelImages(image, rotationDegrees);
+                // mImageDriver.labelImagesCloud(image, rotationDegrees); // cloud Api
                 break;
             case (Constants.barCodeRecognition):
                 Log.d(TAG, "featureProviderDriver: barCodeRecognitionDriver");
@@ -253,8 +255,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void learnAboutInsight() {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+        intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
+        finish();
     }
 
     /*
@@ -262,8 +265,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void requestCall() {
         Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
+        intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
+        finish();
     }
 
     /*
@@ -271,8 +275,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void readTutorials() {
         Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
+        intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
+        finish();
     }
 
     /*

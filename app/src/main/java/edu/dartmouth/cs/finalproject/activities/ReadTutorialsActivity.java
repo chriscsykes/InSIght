@@ -85,4 +85,16 @@ public class ReadTutorialsActivity extends AppCompatActivity implements TextToSp
         mTextToSpeechEngine.closeTextToSpeechEngine();
         super.onDestroy();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = getIntent();
+        if (intent != null){
+            String source = intent.getStringExtra(Constants.SOURCE);
+            if (source != null && source.equals(Constants.MAIN_ACTIVITY)){
+                startActivity(new Intent(ReadTutorialsActivity.this, MainActivity.class));
+            }
+        }
+        super.onBackPressed();
+    }
 }

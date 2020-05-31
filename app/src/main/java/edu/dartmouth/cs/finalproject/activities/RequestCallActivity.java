@@ -23,6 +23,7 @@ import java.util.Locale;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
+import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 
 public class RequestCallActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
@@ -107,8 +108,27 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             mTextToSpeechEngine.setLanguage(Locale.UK);
-//            readCallGuide();
+            readCallGuide();
             Log.d(TAG, "onInit: okay");
         }
+    }
+
+    /*
+     * informs the user of the call button in the middle of the screen
+     */
+    private void readCallGuide() {
+        mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT");
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = getIntent();
+        if (intent != null){
+            String source = intent.getStringExtra(Constants.SOURCE);
+            if (source != null && source.equals(Constants.MAIN_ACTIVITY)){
+                startActivity(new Intent(RequestCallActivity.this, MainActivity.class));
+            }
+        }
+        super.onBackPressed();
     }
 }
