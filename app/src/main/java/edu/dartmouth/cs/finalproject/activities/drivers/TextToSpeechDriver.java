@@ -20,7 +20,7 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.util.Arrays;
 
-import edu.dartmouth.cs.finalproject.activities.Constants;
+import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 
 public class TextToSpeechDriver {
@@ -122,12 +122,6 @@ public class TextToSpeechDriver {
         // Grab image rotation
         int rotation = degreesToFirebaseRotation(degrees);
 
-        // required: without this line you cant use <image> from <imageProxy>
-        /**
-         * issue with cameraX
-         * {@link 'https://issuetracker.google.com/issues/153249512'
-         */
-        mediaImage.getPlanes()[0].getBuffer().rewind();
 
         // provides language hints to assist with language detection
         FirebaseVisionCloudTextRecognizerOptions options = new FirebaseVisionCloudTextRecognizerOptions.Builder()

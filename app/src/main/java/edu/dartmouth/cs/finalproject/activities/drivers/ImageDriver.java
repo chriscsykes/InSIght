@@ -21,7 +21,7 @@ import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceImageLabelerOpt
 
 import java.util.List;
 
-import edu.dartmouth.cs.finalproject.activities.Constants;
+import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 
 public class ImageDriver {
@@ -83,9 +83,9 @@ public class ImageDriver {
                                                     "Try retaking the image", Constants.detectedLabelId);
                                         } else {
                                             // get each label
-                                            String text = "";
+                                            StringBuilder text = new StringBuilder();
                                             for (FirebaseVisionImageLabel label : labels) {
-                                                text += label.getText() + " ";
+                                                text.append(label.getText()).append(" ");
                                             }
                                             // we can edit this
                                             String audio = "This image contains the following items. " + text;
@@ -127,13 +127,6 @@ public class ImageDriver {
         }
         // Grab image rotation
         int rotation = degreesToFirebaseRotation(degrees);
-
-        // required: without this line you cant use <image> from <imageProxy>
-        /**
-         * issue with cameraX
-         * {@link 'https://issuetracker.google.com/issues/153249512'
-         */
-        mediaImage.getPlanes()[0].getBuffer().rewind();
 
         // set label detector options
         FirebaseVisionCloudImageLabelerOptions options = new FirebaseVisionCloudImageLabelerOptions.Builder()

@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
+import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 
 public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
