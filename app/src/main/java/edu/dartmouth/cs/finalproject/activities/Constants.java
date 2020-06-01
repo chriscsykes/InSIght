@@ -1,6 +1,6 @@
 package edu.dartmouth.cs.finalproject.activities;
 
-class Constants {
+public class Constants {
     /* Device permissions REQUEST CODE */
     static final int REQUEST_CODE_CAMERA_PERMISSION = 1;
 
@@ -33,6 +33,9 @@ class Constants {
     /* utterance ids for picture taking */
     static String captureErrorId = "captureErrorId";
     static String captureSuccessId = "captureSuccessId";
+
+    /* utterance ids for login dialogue */
+    public static String loginIntroductionId= "intro";
 
 
 }

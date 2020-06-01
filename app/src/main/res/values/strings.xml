@@ -84,5 +84,7 @@
     <string name="phone_call_permission_denied">Permission Denied</string>
     <string name="voice_recognition_picture">picture of voice recognition</string>
     <string name="call_button">call button</string>
+    <string name="welcome_to_insight_nplease_tell_us_your_name">Welcome to Insight \nPlease tell us your name:</string>
+
 
 </resources>
