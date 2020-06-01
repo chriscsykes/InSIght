@@ -6,17 +6,11 @@ import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 
 import java.util.Locale;
-
-<<<<<<< Updated upstream
-public class TextToSpeechEngine{
-=======
 import edu.dartmouth.cs.finalproject.activities.ui.login.LoginActivity;
 
 public class TextToSpeechEngine {
->>>>>>> Stashed changes
     private static final String TAG = TextToSpeechEngine.class.getName();
     private TextToSpeech mTextToSpeech;
-
     /* default constructor for basic onInitListener */
     public TextToSpeechEngine(Context context){
         mTextToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
@@ -80,5 +74,9 @@ public class TextToSpeechEngine {
      */
     public void closeTextToSpeechEngine(){
         mTextToSpeech.shutdown();
+    }
+
+    public TextToSpeech getTextToSpeech() {
+        return mTextToSpeech;
     }
 }

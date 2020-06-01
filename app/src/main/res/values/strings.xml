@@ -46,7 +46,6 @@
     <string name="help">Help</string>
     <string name="your_name_here">Your name here</string>
     <string name="logo_for_insight_app">logo for insight app</string>
-<<<<<<< Updated upstream
     <string name="skip_slide">Skip Slide</string>
     <string name="done">Done</string>
     <string name="next_slide">Next Slide</string>
@@ -85,8 +84,7 @@
     <string name="phone_call_permission_denied">Permission Denied</string>
     <string name="voice_recognition_picture">picture of voice recognition</string>
     <string name="call_button">call button</string>
-=======
     <string name="welcome_to_insight_nplease_tell_us_your_name">Welcome to Insight \nPlease tell us your name:</string>
->>>>>>> Stashed changes
+
 
 </resources>
