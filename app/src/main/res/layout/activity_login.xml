@@ -14,13 +14,13 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="245dp"
-        android:layout_height="82dp"
-        android:layout_marginTop="80dp"
-        android:text="@string/your_name_here"
+        android:layout_width="324dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="104dp"
+        android:text="@string/welcome_to_insight_nplease_tell_us_your_name"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintHorizontal_bias="0.724"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
