@@ -15,17 +15,17 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activities.RequestCallActivity" />
 <!--        Uncomment to include LoginIn Activity-->
-<!--        <activity-->
-<!--            android:name=".activities.ui.login.LoginActivity"-->
-<!--            android:label="@string/title_activity_login">-->
+        <activity
+            android:name=".activities.ui.login.LoginActivity"
+            android:label="@string/title_activity_login">
 
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-<!--        </activity>-->
+        </activity>
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about2"
@@ -34,11 +34,11 @@
 
         <activity android:name=".activities.MainActivity"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
 
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />

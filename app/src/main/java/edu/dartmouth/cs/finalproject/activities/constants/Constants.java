@@ -37,4 +37,7 @@ public class Constants {
     /* For Navigation intents */
     public static final String SOURCE = "SOURCE";
     public static String MAIN_ACTIVITY = "MAIN_ACTIVITY";
+
+    /* utterance ids for login dialogue */
+    public static String loginIntroductionId= "intro";
 }
