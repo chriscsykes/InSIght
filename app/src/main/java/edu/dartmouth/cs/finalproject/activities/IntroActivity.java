@@ -49,20 +49,28 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
                 Color.BLACK,
                 Color.BLACK));
 
-        // slide 3: barcode scanner
+        // slide 3: image recognition
         addSlide(AppIntroFragment.newInstance(
-                getString(R.string.barcode_scanner_slide),
-                getString(R.string.barcode_scanner_string),
-                R.drawable.barcode_scanner_logo,
+                getString(R.string.image_recognition_slide),
+                getString(R.string.image_recognition_string),
+                R.drawable.image_recognition_logo,
                 ContextCompat.getColor(getApplicationContext(), R.color.slide),
                 Color.BLACK,
                 Color.BLACK));
 
-        // slide 4: image recognition
-        addSlide(AppIntroFragment.newInstance(
-                getString(R.string.image_recognition_slide),
-                getString(R.string.image_recognition_string),
-                R.drawable.facial_recognition_logo_2,
+//        // slide 4: image recognition
+//        addSlide(AppIntroFragment.newInstance(
+//                getString(R.string.image_recognition_slide),
+//                getString(R.string.image_recognition_string),
+//                R.drawable.facial_recognition_logo_2,
+//                ContextCompat.getColor(getApplicationContext(), R.color.slide),
+//                Color.BLACK,
+//                Color.BLACK));
+
+        // Slide with basic instructions on how to use the app
+        addSlide(AppIntroFragment.newInstance(getString(R.string.instructions_slide),
+                getString(R.string.instructions_string),
+                R.drawable.instructions_logo,
                 ContextCompat.getColor(getApplicationContext(), R.color.slide),
                 Color.BLACK,
                 Color.BLACK));
@@ -87,22 +95,22 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
         switch (position) {
             case 0:
                 mTextToSpeechEngine.speakText(getString(R.string.welcome_slide) + ". " +
-                        getString(R.string.welcome_string), "DEFAULT");
+                        getString(R.string.welcome_string) + " Swipe right to continue.", "DEFAULT");
                 currentPage = 0;
                 break;
             case 1:
                 mTextToSpeechEngine.speakText(getString(R.string.text_to_speech_slide) + ". " +
-                        getString(R.string.text_to_speech_string), "DEFAULT");
+                        getString(R.string.text_to_speech_string) + " Swipe right to continue.", "DEFAULT");
                 currentPage = 1;
                 break;
             case 2:
-                mTextToSpeechEngine.speakText(getString(R.string.barcode_scanner_slide) + ". " +
-                        getString(R.string.barcode_scanner_string), "DEFAULT");
+                mTextToSpeechEngine.speakText(getString(R.string.image_recognition_slide) + ". " +
+                        getString(R.string.image_recognition_string) + " Swipe right to continue.", "DEFAULT");
                 currentPage = 2;
                 break;
             case 3:
-                mTextToSpeechEngine.speakText(getString(R.string.image_recognition_slide) + ". " +
-                        getString(R.string.image_recognition_string), "DEFAULT");
+                mTextToSpeechEngine.speakText(getString(R.string.instructions_slide) + ". " +
+                        getString(R.string.instructions_string) + " Press the done button at bottom right of screen to begin.", "DEFAULT");
                 currentPage = 3;
                 break;
         }

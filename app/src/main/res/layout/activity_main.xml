@@ -67,15 +67,6 @@
                             />
 
                         <Button
-                            android:id="@+id/BarCode"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:drawableTop="@drawable/baseline_barcode_80"
-                            android:text="@string/bar_code"
-                            android:onClick="handleBarCodeRecognition"
-                             />
-
-                        <Button
                             android:id="@+id/Image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -83,6 +74,15 @@
                             android:text="@string/image"
                             android:onClick="handleImageRecognition"
                              />
+
+                        <Button
+                            android:id="@+id/BarCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableTop="@drawable/baseline_barcode_80"
+                            android:text="@string/bar_code"
+                            android:onClick="handleBarCodeRecognition"
+                            />
 
                         <Button
                             android:id="@+id/Currency"
