@@ -1,5 +1,6 @@
 package edu.dartmouth.cs.finalproject.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -15,6 +16,7 @@ import java.util.Locale;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
+import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 
 public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListener {
     private static final String TAG = IntroActivity.class.getName();
@@ -117,6 +119,11 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
     @Override
     protected void onDonePressed(Fragment currentFragment) {
         mTextToSpeechEngine.speakText(getString(R.string.done), "DEFAULT");
+        Intent intent = new Intent(this, MainActivity.class);
+
+        String userName = getIntent().getStringExtra(Constants.USERNAME);
+        intent.putExtra(Constants.USERNAME, userName);
+        startActivity(intent);
         super.onDonePressed(currentFragment);
         finish();
     }

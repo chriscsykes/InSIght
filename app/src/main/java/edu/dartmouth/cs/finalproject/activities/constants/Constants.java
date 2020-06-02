@@ -4,11 +4,15 @@ public class Constants {
     /* Device permissions REQUEST CODE */
     public static final int REQUEST_CODE_CAMERA_PERMISSION = 1;
 
+    /* Intent key for userName */
+    public static final String USERNAME = "username";
+
     /* Features */
     public final static String shortTextRecognition = "shortTextRecognition";
     public final static String imageRecognition = "imageRecognition";
     public final static String barCodeRecognition = "barCodeRecognition";
     public final static String currencyRecognition = "currencyRecognition";
+
     public static String detectedTextId = "detectedTextId";
     public static String detectedLabelId = "detectedLabelId";
 
@@ -40,4 +44,5 @@ public class Constants {
 
     /* utterance ids for login dialogue */
     public static String loginIntroductionId= "intro";
+
 }

@@ -27,12 +27,12 @@ import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 
 public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
 
-
-    private static final String USERNAME = "username";//key for retrieving username
+    private static final String TAG = LoginActivity.class.getName();
     private TextToSpeechEngine textToSpeechEngine;
     private String mName;
     private TextView mMessage;
     private ProgressBar mLoadingProgressBar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         mLoadingProgressBar = findViewById(R.id.loading);
         mLoadingProgressBar.setVisibility(View.GONE);
     }
+
 
     private void startDialogue() {
         textToSpeechEngine.speakText("Welcome to Insight. Please tell us" +
@@ -64,11 +65,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         super.onStart();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //beginSpeechRecognizer();
-    }
+
 
     @Override
     protected void onDestroy() {
@@ -78,8 +75,9 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     private void startOnBoarder() {
         Intent intent = new Intent(this, IntroActivity.class);
-        intent.putExtra(USERNAME, mName);
+        intent.putExtra(Constants.USERNAME, mName);
         startActivity(intent);
+        finish();
         //Can we also close the textToSpeech engine at this point?
         //textToSpeechEngine.closeTextToSpeechEngine();
     }
@@ -100,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
 
     // This callback is invoked when the Speech Recognizer returns.
-// This is where you process the intent and extract the speech text from the intent.
+    // This is where you process the intent and extract the speech text from the intent.
     @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
