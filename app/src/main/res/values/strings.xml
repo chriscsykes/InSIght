@@ -8,14 +8,18 @@
         words that they cannot see.</string>
     <string name="barcode_scanner_string">The Barcode Scanner mode provides the user with audio feedback
         based on the barcode or QR code that was scanned.</string>
-    <string name="image_recognition_string">The Facial Recognition mode provides the user with audio feedback
-        of the individuals around them. </string>
+    <string name="image_recognition_string">The Image Recognition mode provides the user with audio feedback
+        of the objects in their environment. </string>
+    <string name="instructions_string">Swipe sideways on the bottom of the screen and press down to determine which feature
+        you are on. Once you have selected the desired feature, position the camera appropriately and tap the
+        screen to begin. Swipe in from the right side of the screen for help and more information.</string>
 
 
     <string name="text_to_speech_slide">Text-to-Speech</string>
     <string name="barcode_scanner_slide">Barcode Scanner</string>
-    <string name="image_recognition_slide">Facial Recognition</string>
+    <string name="image_recognition_slide">Image Recognition</string>
     <string name="welcome_slide">Welcome to InSight!</string>
+    <string name="instructions_slide">How to Use InSight</string>
 
 
     <string name="open_drawer">open drawer</string>
@@ -86,6 +90,8 @@
     <string name="call_button">call button</string>
     <string name="call_guide">Tap the middle of your screen to call</string>
     <string name="welcome_to_insight_nplease_tell_us_your_name">Welcome to Insight \nPlease tell us your name:</string>
+
+
 
 
 </resources>
