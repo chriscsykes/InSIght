@@ -42,8 +42,13 @@ import java.util.concurrent.ExecutionException;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
+import edu.dartmouth.cs.finalproject.activities.constants.Constants;
+import edu.dartmouth.cs.finalproject.activities.drivers.ImageDriver;
+import edu.dartmouth.cs.finalproject.activities.drivers.TextToSpeechDriver;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final String QUERY_PARAMETER_NAME = "featureName";
 
     private static final String TAG = MainActivity.class.getName();
     private ImageCapture imageCapture;
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private String currentFeature;
 
     private TextToSpeechDriver mTextToSpeechDriver;
+    private ImageDriver mImageDriver;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,7 +100,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
     }
+
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
@@ -116,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     private void initialiseFeatureDrivers() {
         mTextToSpeechDriver = new TextToSpeechDriver(this);
         //mBarCodeDriver = new BarCodeDriver(this);
-        //mImageDriver = new ImageDriver(this)
+        mImageDriver = new ImageDriver(this);
     }
 
     /*
@@ -135,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCaptureSuccess(@NonNull ImageProxy image) {
                 Log.d(TAG, "onCaptureSuccess(): Captured image");
-                if (currentFeature != null){
+                if (currentFeature != null) {
                     mTextToSpeechEngine.speakText("Processing Image. Hold on.", Constants.captureSuccessId);
                     featureProviderDriver(image); // determines what feature to call on the captured Image
                 }
@@ -161,14 +172,18 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("UnsafeExperimentalUsageError")
     private void featureProviderDriver(ImageProxy image) {
         if (currentFeature == null) return;
-        switch(currentFeature){
-            case(Constants.shortTextRecognition):
+        switch (currentFeature) {
+            case (Constants.shortTextRecognition):
                 Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
                 int rotationDegrees = image.getImageInfo().getRotationDegrees();
-                mTextToSpeechDriver.recognizeText(image,  rotationDegrees);
+                mTextToSpeechDriver.recognizeText(image, rotationDegrees);
+                //mTextToSpeechDriver.recognizeText(image,  rotationDegrees); // cloud Api
                 break;
             case (Constants.imageRecognition):
                 Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
+                rotationDegrees = image.getImageInfo().getRotationDegrees();
+//                mImageDriver.labelImages(image, rotationDegrees);
+                 mImageDriver.labelImagesCloud(image, rotationDegrees); // cloud Api
                 break;
             case (Constants.barCodeRecognition):
                 Log.d(TAG, "featureProviderDriver: barCodeRecognitionDriver");
@@ -177,6 +192,33 @@ public class MainActivity extends AppCompatActivity {
                 // could add more case blocks for more features
                 Log.d(TAG, "featureProviderDriver: unsupported Feature " + currentFeature);
         }
+    }
+
+    private void handleIntent(Intent intent) {
+        if (intent == null) return;
+        String action = intent.getAction();
+        if (action != null && action.equals(Intent.ACTION_VIEW)){
+            // When the action is triggered by a deep-link, Intent.ACTION_VIEW will be used
+            handleDeepLink(intent.getData());
+        }
+        
+    }
+
+    private void handleDeepLink(Uri data) {
+       String linkPath =  data.getQueryParameter(QUERY_PARAMETER_NAME);
+       if (linkPath != null){
+           switch (linkPath){
+               case "text recognition":
+                   Log.d(TAG, "handleDeepLink: text recognition" + linkPath);
+                   break;
+               case "image":
+                   Log.d(TAG, "handleDeepLink: image recognition" + linkPath);
+                   break;
+               default:
+                   Log.d(TAG, "handleDeepLink: " + linkPath);
+           }
+       }
+        Log.d(TAG, "handleDeepLink: " + linkPath);
     }
 
     /*
@@ -247,8 +289,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void learnAboutInsight() {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+        intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
+        finish();
     }
 
     /*
@@ -256,8 +299,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void requestCall() {
         Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
+        intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
+        finish();
     }
 
     /*
@@ -265,8 +309,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void readTutorials() {
         Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
+        intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
+        finish();
     }
 
     /*
@@ -299,11 +344,10 @@ public class MainActivity extends AppCompatActivity {
             NavigationView navigationView = findViewById(R.id.navigation);
             drawerLayout.openDrawer(navigationView);
             mTextToSpeechEngine.speakText("help", Constants.helpId);
-        }else{
+        } else {
             // No other action button in action bar
             mTextToSpeechEngine.speakText("Insight App Logo", Constants.helpId);
         }
-
 
 
         Log.d(TAG, "onOptionsItemSelected: " + item.getItemId());
@@ -340,7 +384,6 @@ public class MainActivity extends AppCompatActivity {
         previewLayout = findViewById(R.id.preview_view);
 
 
-
         ListenableFuture cameraProviderFuture =
                 ProcessCameraProvider.getInstance(this);
 
@@ -371,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Connect the preview use case to the previewView
                 preview.setSurfaceProvider(
-                        previewLayout.createSurfaceProvider(mCamera.getCameraInfo()));
+                        previewLayout.createSurfaceProvider());
             } catch (InterruptedException | ExecutionException e) {
                 // Currently no exceptions thrown. cameraProviderFuture.get() should
                 // not block since the listener is being called, so no need to
@@ -499,6 +542,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         mTextToSpeechEngine.closeTextToSpeechEngine();
         mTextToSpeechDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
+        mImageDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
         super.onDestroy();
     }
 }

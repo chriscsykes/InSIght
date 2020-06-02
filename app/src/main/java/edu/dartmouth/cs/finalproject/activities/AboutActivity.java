@@ -1,5 +1,6 @@
 package edu.dartmouth.cs.finalproject.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -13,6 +14,7 @@ import java.util.Locale;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
+import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 
 public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
@@ -82,5 +84,18 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
     protected void onDestroy() {
         mTextToSpeechEngine.closeTextToSpeechEngine();
         super.onDestroy();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = getIntent();
+        if (intent != null){
+            String source = intent.getStringExtra(Constants.SOURCE);
+            if (source != null && source.equals(Constants.MAIN_ACTIVITY)){
+                startActivity(new Intent(AboutActivity.this, MainActivity.class));
+            }
+        }
+        super.onBackPressed();
     }
 }

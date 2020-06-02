@@ -2,11 +2,9 @@ package edu.dartmouth.cs.finalproject.activities.audio;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 
 import java.util.Locale;
-import edu.dartmouth.cs.finalproject.activities.ui.login.LoginActivity;
 
 public class TextToSpeechEngine {
     private static final String TAG = TextToSpeechEngine.class.getName();
