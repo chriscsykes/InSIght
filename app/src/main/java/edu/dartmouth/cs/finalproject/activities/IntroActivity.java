@@ -120,6 +120,11 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
     @Override
     protected void onSkipPressed(Fragment currentFragment) {
         mTextToSpeechEngine.speakText(getString(R.string.skip_slide), "DEFAULT");
+        Intent intent = new Intent(this, MainActivity.class);
+
+        String userName = getIntent().getStringExtra(Constants.USERNAME);
+        intent.putExtra(Constants.USERNAME, userName);
+        startActivity(intent);
         super.onSkipPressed(currentFragment);
         finish();
     }

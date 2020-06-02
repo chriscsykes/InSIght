@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -327,7 +328,9 @@ public class MainActivity extends AppCompatActivity {
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(Constants.firstTime, true);
-            editor.apply();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                editor.apply();
+            }
         }
     }
 
@@ -365,7 +368,6 @@ public class MainActivity extends AppCompatActivity {
         // Remove default title text
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
-
     }
 
 
@@ -460,22 +462,24 @@ public class MainActivity extends AppCompatActivity {
                 // set Boolean permission RESULT = true;
             } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 // permission denied, show rationale
-                if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
-                ) {
-                    AlertDialog.Builder rationale = new AlertDialog.Builder(this);
-                    rationale.setMessage("Without the camera the app can't function. Do you grant permission?")
-                            .setTitle("Camera Access");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
+                    ) {
+                        AlertDialog.Builder rationale = new AlertDialog.Builder(this);
+                        rationale.setMessage("Without the camera the app can't function. Do you grant permission?")
+                                .setTitle("Camera Access");
 
-                    rationale.setPositiveButton("OK", (dialog, which) -> ActivityCompat.
-                            requestPermissions(MainActivity.this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    Constants.REQUEST_CODE_CAMERA_PERMISSION));
+                        rationale.setPositiveButton("OK", (dialog, which) -> ActivityCompat.
+                                requestPermissions(MainActivity.this,
+                                        new String[]{Manifest.permission.CAMERA},
+                                        Constants.REQUEST_CODE_CAMERA_PERMISSION));
 
-                    rationale.setNegativeButton("NO", (dialog, which) -> {
-                        dialog.dismiss();
-                        MainActivity.this.finish();
-                    });
-                    rationale.show();
+                        rationale.setNegativeButton("NO", (dialog, which) -> {
+                            dialog.dismiss();
+                            MainActivity.this.finish();
+                        });
+                        rationale.show();
+                    }
                 }
             }
         }
