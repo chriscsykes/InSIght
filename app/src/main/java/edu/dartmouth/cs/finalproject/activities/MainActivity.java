@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -208,11 +209,11 @@ public class MainActivity extends AppCompatActivity {
                 provideFeedBack();
                 break;
             case R.id.nav_request_call:
-                mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
+                mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId, TextToSpeech.QUEUE_ADD);
                 requestCall();
                 break;
             case R.id.nav_about_insight:
-                mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
+                mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId, TextToSpeech.QUEUE_ADD);
                 learnAboutInsight();
                 break;
             case R.id.nav_share_with_friends:

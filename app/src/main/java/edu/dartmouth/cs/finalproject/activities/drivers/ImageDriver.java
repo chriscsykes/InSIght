@@ -84,7 +84,10 @@ public class ImageDriver {
                                         } else {
                                             // get each label
                                             StringBuilder text = new StringBuilder();
+
+                                            // find the label with the highest confidence
                                             for (FirebaseVisionImageLabel label : labels) {
+                                                label.getConfidence();
                                                 text.append(label.getText()).append(" ");
                                             }
                                             // we can edit this
