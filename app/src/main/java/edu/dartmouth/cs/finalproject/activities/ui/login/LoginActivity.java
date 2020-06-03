@@ -190,6 +190,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
     @Override
     public void onInit(int status) {
         if (status != TextToSpeech.ERROR) {
+            textToSpeechEngine.setLanguage(Locale.UK);
             startDialogue();
             textToSpeechEngine.getTextToSpeech().setOnUtteranceProgressListener(new UtteranceProgressListener() {
                 @Override

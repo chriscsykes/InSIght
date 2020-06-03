@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean handleNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_tutorials:
-                // mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
+                 mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
                 readTutorials();
                 break;
             case R.id.nav_feedback:
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-        finish();
+//        finish(); TODO
     }
 
     @Override
