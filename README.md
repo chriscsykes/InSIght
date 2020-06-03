@@ -57,7 +57,7 @@ From here on out:
 - If there's time, add barcode, color, or currency recogniton
 
 
-### Download APK
+### Download APK https://drive.google.com/file/d/1rCnARfaD0p58YvcCweHj1kzi9GL4qgWc/view?usp=sharing
 
 ### Google Presentation
 
