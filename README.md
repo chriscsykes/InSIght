@@ -19,7 +19,7 @@ Using CameraX and Google Firebase, this app helps the visually impaired by provi
 
 
 2. Once logged in, swipe the bottom of the screen and press down to determine which feature you are on.
- ![](images/emulator_button.gif)
+ ![](images/emulator_buttons.gif)
 
 3. Once you have selected the desired feature, position the camera appropriately and tap the screen
 to begin. Hold the phone steady while the camera takes in the image to be processed.
