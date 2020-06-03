@@ -16,7 +16,7 @@ import edu.dartmouth.cs.finalproject.activities.MainActivity;
 import edu.dartmouth.cs.finalproject.utils.Preference;
 
 public class SplashScreen extends AppCompatActivity {
-    private static final int TIME_ELAPSED = 3000;
+    private static final int TIME_ELAPSED = 2000;
 
     // Animation variables
     Animation topAnim, bottomAnim;
