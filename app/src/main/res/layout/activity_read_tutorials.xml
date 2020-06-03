@@ -91,7 +91,7 @@
             android:layout_marginStart="116dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="116dp"
-            android:src="@drawable/vysor_buttons"
+            android:src="@drawable/emulator_buttons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description2" />
@@ -154,7 +154,7 @@
             android:layout_marginStart="116dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="116dp"
-            android:src="@drawable/vysor_nav_no_cursor"
+            android:src="@drawable/emulator_nav_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description4"
