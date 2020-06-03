@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,8 +46,6 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
     private ProgressBar mLoadingProgressBar;
     private DatabaseReference mDatabase;
 
-    private boolean userExists;
-
     private edu.dartmouth.cs.finalproject.utils.Preference preference;
 
     @Override
@@ -65,9 +64,9 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         }
 
 
-        textToSpeechEngine = new TextToSpeechEngine(this, this);
         setContentView(R.layout.activity_login);
-
+        createFullScreen();
+        textToSpeechEngine = new TextToSpeechEngine(this, this);
         mMessage = (TextView) findViewById(R.id.textView2);
 
         mLoadingProgressBar = findViewById(R.id.loading);
@@ -78,6 +77,13 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference("user");
 
+    }
+
+    /*
+     * Creates a full screen, hiding app
+     */
+    private void createFullScreen() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void startDialogue() {
@@ -137,7 +143,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
             if (resultCode == RESULT_OK && data != null) {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 assert result != null;
-                mMessage.setText("Welcome " + result.get(0));
+                mMessage.setText(result.get(0));
                 mName = result.get(0);
 
                 // query database with the name given
@@ -155,9 +161,9 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         }
     }
 
-    private void signInUser(){
+    private void signInUser() {
         textToSpeechEngine.speakText("Welcome back " + mName, "loginSuccess");
-        mLoadingProgressBar.setVisibility(View.VISIBLE);
+//        mLoadingProgressBar.setVisibility(View.VISIBLE);
 
         // user is now logged in
         preference.setLoginStatus(true);
@@ -168,7 +174,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         Log.d(TAG, "onActivityResult: old user signing in");
     }
 
-    private void signUpUser(){
+    private void signUpUser() {
         // need to add the new user to the database, and sent them to the onBoarder
         // Generate a reference to a new location and add some data using push()
         DatabaseReference pushedNewUserRef = mDatabase.push();
@@ -184,6 +190,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
     @Override
     public void onInit(int status) {
         if (status != TextToSpeech.ERROR) {
+            textToSpeechEngine.setLanguage(Locale.UK);
             startDialogue();
             textToSpeechEngine.getTextToSpeech().setOnUtteranceProgressListener(new UtteranceProgressListener() {
                 @Override
@@ -192,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
                 @Override
                 public void onDone(String utteranceId) {
-                    if (utteranceId.equals(Constants.loginIntroductionId)||utteranceId.equals(Constants.TryAgainID)) {
+                    if (utteranceId.equals(Constants.loginIntroductionId) || utteranceId.equals(Constants.TryAgainID)) {
                         beginSpeechRecognizer();
                     }
                 }
@@ -217,13 +224,11 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()){
+            if (dataSnapshot.exists()) {
                 Log.d(TAG, "onDataChange: " + mName + " exists " + dataSnapshot.toString());
-                userExists = true;
                 signInUser();
-            }else{
+            } else {
                 Log.d(TAG, "onDataChange: user does not exist in DB " + dataSnapshot.toString());
-                userExists = false;
                 signUpUser();
             }
         }

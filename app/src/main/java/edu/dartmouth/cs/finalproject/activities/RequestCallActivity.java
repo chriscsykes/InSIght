@@ -117,7 +117,13 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
      * informs the user of the call button in the middle of the screen
      */
     private void readCallGuide() {
-        mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT");
+       if ( mTextToSpeechEngine.getTextToSpeech().isSpeaking()){
+           Log.d(TAG, "readCallGuide: is speaking");
+           mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT", TextToSpeech.QUEUE_ADD);
+        }
+       else{
+           mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT");
+       }
     }
 
     @Override

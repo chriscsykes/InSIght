@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkPermissions();
-        launchOnBoarder();
         setUpCamera();
         setUpActionBar();
         initialiseFeatureDrivers();
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean handleNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_tutorials:
-                // mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
+                 mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
                 readTutorials();
                 break;
             case R.id.nav_feedback:
@@ -208,11 +206,11 @@ public class MainActivity extends AppCompatActivity {
                 provideFeedBack();
                 break;
             case R.id.nav_request_call:
-                // mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
+                 mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
                 requestCall();
                 break;
             case R.id.nav_about_insight:
-                // mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
+                 mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
                 learnAboutInsight();
                 break;
             case R.id.nav_share_with_friends:
@@ -273,9 +271,9 @@ public class MainActivity extends AppCompatActivity {
         intent.setType("text/plain");
         intent.setData(Uri.parse("smsto:"));
         intent.putExtra("sms_body", message);
-        if (intent.resolveActivity(getPackageManager()) != null) {
+//        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-        }
+//        }
     }
 
     /*
@@ -285,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-        finish();
+//        finish();
     }
 
     /*
@@ -295,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-        finish();
+//        finish();
     }
 
     /*
@@ -305,24 +303,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-        finish();
-    }
-
-    /*
-     * Determines if this is the app's first installation before launching onBoarder
-     * else we take note of the app's installation using shared Prefs
-     */
-    private void launchOnBoarder() {
-        SharedPreferences prefs = this.getPreferences(MODE_PRIVATE);
-        if (!prefs.getBoolean(Constants.firstTime, false)) {
-            // we should run our one time code
-            Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
-            startActivity(intent);
-
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean(Constants.firstTime, true);
-            editor.apply();
-        }
+//        finish(); TODO
     }
 
     @Override

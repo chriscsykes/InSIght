@@ -85,11 +85,11 @@ public class ImageDriver {
                                             // get each label
                                             StringBuilder text = new StringBuilder();
                                             for (FirebaseVisionImageLabel label : labels) {
-                                                text.append(label.getText()).append(" ");
+                                                text.append(label.getText()).append(". ");
                                             }
-                                            // we can edit this
                                             String audio = "This image contains the following items. " + text;
                                             Log.d(TAG, "onSuccess: " + audio);
+
                                             mTextToSpeechEngine.speakText(audio, Constants.detectedLabelId);
                                         }
                                     }
@@ -157,7 +157,7 @@ public class ImageDriver {
                                             // get each label
                                             StringBuilder text = new StringBuilder();
                                             for (FirebaseVisionImageLabel label : labels) {
-                                                text.append(label.getText()).append(" ");
+                                                text.append(label.getText()).append(".\n ");
                                             }
                                             String audio = "This image contains the following items. " + text;
                                             Log.d(TAG, "onSuccess: " + audio);

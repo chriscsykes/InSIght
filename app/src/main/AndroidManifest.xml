@@ -14,40 +14,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-
-        <activity android:name=".activities.RequestCallActivity" /> <!-- Uncomment to include LoginIn Activity -->
         <activity
-            android:name=".activities.ui.login.LoginActivity"
+            android:name=".activities.ui.login.SplashScreen"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.RequestCallActivity" />
+
+        <!-- Uncomment to include LoginIn Activity -->
+        <activity
+            android:name=".activities.ui.login.LoginActivity"
+            android:label="@string/app_name">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about2"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".activities.MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
+        <activity
+            android:name=".activities.MainActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.IntroActivity" />
+        <activity
+            android:name=".activities.IntroActivity"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".activities.ReadTutorialsActivity"
             android:label="@string/title_activity_read_tutorials"
             android:theme="@style/NoActionBar" />
+
     </application>
 </manifest>
