@@ -91,7 +91,7 @@
             android:layout_marginStart="116dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="116dp"
-            android:src="@drawable/buttons_gif"
+            android:src="@drawable/vysor_buttons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description2" />
@@ -111,14 +111,23 @@
             app:layout_constraintTop_toBottomOf="@+id/buttons_gif">
         </TextView>
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/feature_click_gif"
+<!--        <pl.droidsonroids.gif.GifImageView-->
+<!--            android:id="@+id/feature_click_gif"-->
+<!--            android:layout_width="179dp"-->
+<!--            android:layout_height="270dp"-->
+<!--            android:layout_marginStart="116dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginEnd="116dp"-->
+<!--            android:src="@drawable/buttons_gif"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/description3" />-->
+
+        <ImageView
+            android:id="@+id/touch_pic"
             android:layout_width="179dp"
             android:layout_height="270dp"
-            android:layout_marginStart="116dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="116dp"
-            android:src="@drawable/buttons_gif"
+            android:src="@drawable/touch_action"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description3" />
@@ -135,7 +144,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feature_click_gif">
+            app:layout_constraintTop_toBottomOf="@+id/touch_pic">
         </TextView>
 
         <pl.droidsonroids.gif.GifImageView
@@ -145,7 +154,7 @@
             android:layout_marginStart="116dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="116dp"
-            android:src="@drawable/nav_view_gif"
+            android:src="@drawable/vysor_nav_w_cursor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description4"
