@@ -113,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     // Create an intent that can start the Speech Recognizer activity
     public void beginSpeechRecognizer() {
+
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -148,9 +149,10 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
                 // set up a listener to detect if the user is already in the database
                 query.addListenerForSingleValueEvent(valueEventListener);
 
-            } else {
+            }
+            else {
                 // Uncomment for now
-                // textToSpeechEngine.speakText("I am sorry. I could not quite hear that. Can you repeat your name for me?", "name_second_try");
+                textToSpeechEngine.speakText("I am sorry. I could not quite hear that. Can you repeat your name for me?", "name_second_try");
                 beginSpeechRecognizer();
             }
         }

@@ -29,7 +29,8 @@
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about2"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+            android:launchMode="singleInstance">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -44,7 +45,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.IntroActivity" />
+        <activity android:name=".activities.IntroActivity"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".activities.ReadTutorialsActivity"
             android:label="@string/title_activity_read_tutorials"

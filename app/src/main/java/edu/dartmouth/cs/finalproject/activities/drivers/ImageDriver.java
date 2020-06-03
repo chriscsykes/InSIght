@@ -88,7 +88,7 @@ public class ImageDriver {
                                             // find the label with the highest confidence
                                             for (FirebaseVisionImageLabel label : labels) {
                                                 label.getConfidence();
-                                                text.append(label.getText()).append(" ");
+                                                text.append(label.getText()).append(". ");
                                             }
                                             // we can edit this
                                             String audio = "This image contains the following items. " + text;

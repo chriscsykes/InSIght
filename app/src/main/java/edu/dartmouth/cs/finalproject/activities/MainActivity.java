@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkPermissions();
-        launchOnBoarder();
+//        launchOnBoarder();
         setUpCamera();
         setUpActionBar();
         initialiseFeatureDrivers();
@@ -208,11 +208,11 @@ public class MainActivity extends AppCompatActivity {
                 provideFeedBack();
                 break;
             case R.id.nav_request_call:
-                // mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
+                 mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
                 requestCall();
                 break;
             case R.id.nav_about_insight:
-                // mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
+                 mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
                 learnAboutInsight();
                 break;
             case R.id.nav_share_with_friends:
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-        finish();
+//        finish();
     }
 
     /*
@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-        finish();
+//        finish();
     }
 
     /*
