@@ -271,9 +271,9 @@ public class MainActivity extends AppCompatActivity {
         intent.setType("text/plain");
         intent.setData(Uri.parse("smsto:"));
         intent.putExtra("sms_body", message);
-        if (intent.resolveActivity(getPackageManager()) != null) {
+//        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-        }
+//        }
     }
 
     /*

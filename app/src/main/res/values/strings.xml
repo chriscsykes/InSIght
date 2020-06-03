@@ -89,7 +89,7 @@
     <string name="phone_call_permission_denied">Permission Denied</string>
     <string name="voice_recognition_picture">picture of voice recognition</string>
     <string name="call_button">call button</string>
-    <string name="call_guide">Request a call. Tap the middle of your screen to call</string>
+    <string name="call_guide">Tap the middle of your screen to call</string>
     <string name="welcome_to_insight_please_tell_us_your_name">Please tell us your name</string>
     <string name="sign_out">Sign Out</string>
 

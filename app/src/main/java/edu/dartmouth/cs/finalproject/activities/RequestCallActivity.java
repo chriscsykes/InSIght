@@ -119,9 +119,10 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
     private void readCallGuide() {
        if ( mTextToSpeechEngine.getTextToSpeech().isSpeaking()){
            Log.d(TAG, "readCallGuide: is speaking");
+           mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT", TextToSpeech.QUEUE_ADD);
         }
        else{
-           mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT", TextToSpeech.QUEUE_ADD);
+           mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT");
        }
     }
 
