@@ -45,5 +45,5 @@ public class Constants {
 
     /* utterance ids for login dialogue */
     public static String loginIntroductionId= "intro";
-
+    public static String TryAgainID = "name_second_try";
 }
