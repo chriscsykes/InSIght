@@ -26,7 +26,7 @@ to begin. Hold the phone steady while the camera takes in the image to be proces
 
 4. To log out, call for support, listen to the tutorial, provide feedback, learn more about InSight, or share
 this app with a friend, swipe inward from the right edge of the screen, or press the help button in
-the top right corner of screen to access the navigation view.
+the top right corner of screen to access the navigation view.\n
 ![](images/nav_view_gif.gif)
 
 
