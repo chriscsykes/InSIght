@@ -60,9 +60,10 @@
     <string name="about_paragraph">InSight is an Android application aimed at improving the quality of life of the visually impaired. Using CameraX and Google Firebase, this app helps the visually impaired by providing features like:</string>
     <string name="creators_paragraph">Created by Sylvester Coch, Sebastian Saker, and Christopher Sykes</string>
     <string name="credits_paragraph">Icon made by Icongeek26 from www.flaticon.com.</string>
-    <string name="features_paragraph">- Firebase authentication via speech \n \n
+    <string name="features_paragraph">- Login and Sign up via speech \n \n
     - Audio feedback on button presses using Google\'s text to speech engine \n \n
     - Text recognition for short texts and documents using Firebase ML Kit\'s text recognition API \n \n
+        - Image recognition to using Firebase ML Kit\'s image labeling API \n \n
     - And more</string>
     <string name="contact_info_paragraph">For more info please visit https://github.com/chriscsykes/InSight or email us at InSightApp@gmail.com</string>
     <string name="title_activity_about2">AboutActivity2</string>
@@ -88,7 +89,7 @@
     <string name="phone_call_permission_denied">Permission Denied</string>
     <string name="voice_recognition_picture">picture of voice recognition</string>
     <string name="call_button">call button</string>
-    <string name="call_guide">Tap the middle of your screen to call</string>
+    <string name="call_guide">Request a call. Tap the middle of your screen to call</string>
     <string name="welcome_to_insight_nplease_tell_us_your_name">Welcome to Insight \nPlease tell us your name:</string>
     <string name="sign_out">Sign Out</string>
 

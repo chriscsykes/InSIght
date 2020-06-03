@@ -208,11 +208,11 @@ public class MainActivity extends AppCompatActivity {
                 provideFeedBack();
                 break;
             case R.id.nav_request_call:
-                mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
+                // mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
                 requestCall();
                 break;
             case R.id.nav_about_insight:
-                mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
+                // mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
                 learnAboutInsight();
                 break;
             case R.id.nav_share_with_friends:
