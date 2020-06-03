@@ -50,5 +50,4 @@
             android:label="@string/title_activity_read_tutorials"
             android:theme="@style/NoActionBar" />
     </application>
-
 </manifest>

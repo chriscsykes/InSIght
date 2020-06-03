@@ -2,6 +2,9 @@
 
 ## Dartmouth CS65 Final Project
 
+### Download APK
+[Click Here](https://drive.google.com/file/d/1rCnARfaD0p58YvcCweHj1kzi9GL4qgWc/view?usp=sharing)
+
 ### Project Description:
 InSight is an Android application aimed at improving the quality of life of the visually imapaired.
 Using CameraX and Google Firebase, this app helps the visually impaired by providing features like:
@@ -10,6 +13,22 @@ Using CameraX and Google Firebase, this app helps the visually impaired by provi
 - Using Firebase ML Kit's text recogintion API to recognize text and provide audio feedback
 - Using Firebase ML Kit's image recognition API to recognize objects in the users surrounding, and provide audio feedback
 - Add-on features like 'Read Tutorials', and 'Provide Feedback' that improve the users experience
+
+### How to Use InSight
+1. Open the app, and spell out your name when prompted to.
+
+
+2. Once logged in, swipe the bottom of the screen and press down to determine which feature you are on.
+![](images/buttons_gif.gif)
+
+3. Once you have selected the desired feature, position the camera appropriately and tap the screen
+to begin. Hold the phone steady while the camera takes in the image to be processed.
+
+4. To log out, call for support, listen to the tutorial, provide feedback, learn more about InSight, or share
+this app with a friend, swipe inward from the right edge of the screen, or press the help button in
+the top right corner of screen to access the navigation view.
+![](images/nav_view_gif.gif)
+
 
 
 ### Original Pitch
@@ -37,8 +56,6 @@ From here on out:
 - Completed UI
 
 
-
-
 ### Show and Tell 2:
 
 #### Thread Design Diagram:
@@ -52,16 +69,15 @@ From here on out:
 
 #### What's Next?
 - Finish the app!
-- Finish implementing the realtime database
-- Add image description funcitonality
+- Clean up UI
+- Finish implementing the Firebase realtime database
+- Finish all audio feedback
+- Add image recognition funcitonality
 - If there's time, add barcode, color, or currency recogniton
 
 
-### Download APK
-[Click Here](https://drive.google.com/file/d/1rCnARfaD0p58YvcCweHj1kzi9GL4qgWc/view?usp=sharing)
-
-### Google Presentation
-
+#### Credits
+Icon made by Icongeek26 from www.flaticon.com.
 
 
 
