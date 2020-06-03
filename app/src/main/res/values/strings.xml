@@ -43,7 +43,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome to Insight"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -90,7 +90,7 @@
     <string name="voice_recognition_picture">picture of voice recognition</string>
     <string name="call_button">call button</string>
     <string name="call_guide">Request a call. Tap the middle of your screen to call</string>
-    <string name="welcome_to_insight_nplease_tell_us_your_name">Welcome to Insight \nPlease tell us your name:</string>
+    <string name="welcome_to_insight_please_tell_us_your_name">Please tell us your name</string>
     <string name="sign_out">Sign Out</string>
 
 
