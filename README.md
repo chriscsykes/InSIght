@@ -19,15 +19,15 @@ Using CameraX and Google Firebase, this app helps the visually impaired by provi
 
 
 2. Once logged in, swipe the bottom of the screen and press down to determine which feature you are on.
-![](images/buttons_gif.gif)
+  ![](images/buttons_gif.gif)
 
 3. Once you have selected the desired feature, position the camera appropriately and tap the screen
 to begin. Hold the phone steady while the camera takes in the image to be processed.
 
 4. To log out, call for support, listen to the tutorial, provide feedback, learn more about InSight, or share
 this app with a friend, swipe inward from the right edge of the screen, or press the help button in
-the top right corner of screen to access the navigation view.\n
-![](images/nav_view_gif.gif)
+the top right corner of screen to access the navigation view.
+  ![](images/nav_view_gif.gif)
 
 
 
