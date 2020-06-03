@@ -16,7 +16,7 @@ Using CameraX and Google Firebase, this app helps the visually impaired by provi
 
 ### How to Use InSight
 1. Open the app, and spell out your name when prompted to.
-
+![](images/login_ui.gif)
 
 2. Once logged in, swipe the bottom of the screen and press down to determine which feature you are on.
  ![](images/emulator_buttons.gif)
