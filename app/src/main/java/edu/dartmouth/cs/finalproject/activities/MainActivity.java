@@ -45,10 +45,10 @@ import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 import edu.dartmouth.cs.finalproject.activities.drivers.ImageDriver;
 import edu.dartmouth.cs.finalproject.activities.drivers.TextToSpeechDriver;
+import edu.dartmouth.cs.finalproject.activities.ui.login.LoginActivity;
+import edu.dartmouth.cs.finalproject.utils.Preference;
 
 public class MainActivity extends AppCompatActivity {
-
-    private final String QUERY_PARAMETER_NAME = "featureName";
 
     private static final String TAG = MainActivity.class.getName();
     private ImageCapture imageCapture;
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextToSpeechDriver mTextToSpeechDriver;
     private ImageDriver mImageDriver;
+    private Preference preference;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,11 +100,8 @@ public class MainActivity extends AppCompatActivity {
             button.setWidth(width);
         }
 
-
-        // ATTENTION: This was auto-generated to handle app links.
-        Intent appLinkIntent = getIntent();
-        String appLinkAction = appLinkIntent.getAction();
-        Uri appLinkData = appLinkIntent.getData();
+        // grab a reference to Shared preference
+        preference = new Preference(this);
     }
 
 
@@ -176,13 +174,13 @@ public class MainActivity extends AppCompatActivity {
             case (Constants.shortTextRecognition):
                 Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
                 int rotationDegrees = image.getImageInfo().getRotationDegrees();
-                mTextToSpeechDriver.recognizeText(image, rotationDegrees);
-                //mTextToSpeechDriver.recognizeText(image,  rotationDegrees); // cloud Api
+                // mTextToSpeechDriver.recognizeText(image, rotationDegrees); // device Api
+                mTextToSpeechDriver.recognizeTextCloud(image,  rotationDegrees); // cloud Api
                 break;
             case (Constants.imageRecognition):
                 Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
                 rotationDegrees = image.getImageInfo().getRotationDegrees();
-//                mImageDriver.labelImages(image, rotationDegrees);
+                // mImageDriver.labelImages(image, rotationDegrees);    // Device Api
                  mImageDriver.labelImagesCloud(image, rotationDegrees); // cloud Api
                 break;
             case (Constants.barCodeRecognition):
@@ -194,32 +192,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void handleIntent(Intent intent) {
-        if (intent == null) return;
-        String action = intent.getAction();
-        if (action != null && action.equals(Intent.ACTION_VIEW)){
-            // When the action is triggered by a deep-link, Intent.ACTION_VIEW will be used
-            handleDeepLink(intent.getData());
-        }
-        
-    }
 
-    private void handleDeepLink(Uri data) {
-       String linkPath =  data.getQueryParameter(QUERY_PARAMETER_NAME);
-       if (linkPath != null){
-           switch (linkPath){
-               case "text recognition":
-                   Log.d(TAG, "handleDeepLink: text recognition" + linkPath);
-                   break;
-               case "image":
-                   Log.d(TAG, "handleDeepLink: image recognition" + linkPath);
-                   break;
-               default:
-                   Log.d(TAG, "handleDeepLink: " + linkPath);
-           }
-       }
-        Log.d(TAG, "handleDeepLink: " + linkPath);
-    }
 
     /*
      * calls methods relating to onClick events for the navigation drawer
@@ -246,11 +219,32 @@ public class MainActivity extends AppCompatActivity {
                 mTextToSpeechEngine.speakText("Share with Friends", Constants.shareWithFriendsId);
                 shareWithFriends();
                 break;
+            case R.id.nav_sign_out:
+                mTextToSpeechEngine.speakText("Sign Out", Constants.signOutId);
+                signOut();
+                break;
             default:
                 return false;
         }
         return true;
 
+    }
+    /*
+     * Signs the user out and returns to login Activity
+     * Sets the signIn indicator to false
+     */
+    private void signOut() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
+        // if user wants to log out take them to the login Activity
+        if (preference.getLoginStatus()) {
+            Log.d(TAG, "signOut: user signed in but signing out now" + preference.getLoginStatus());
+            preference.setLoginStatus(false);
+        }else{
+            Log.d(TAG, "signOut: user not signed in" + preference.getLoginStatus());
+        }
+        startActivity(intent);
+        finish();
     }
 
     /*
@@ -365,7 +359,6 @@ public class MainActivity extends AppCompatActivity {
         // Remove default title text
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayShowTitleEnabled(false);
-
     }
 
 
@@ -540,7 +533,7 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onDestroy() {
-        mTextToSpeechEngine.closeTextToSpeechEngine();
+        if (mTextToSpeechEngine != null) mTextToSpeechEngine.closeTextToSpeechEngine();
         mTextToSpeechDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
         mImageDriver.getTextToSpeechEngine().closeTextToSpeechEngine();
         super.onDestroy();

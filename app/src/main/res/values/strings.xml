@@ -90,8 +90,7 @@
     <string name="call_button">call button</string>
     <string name="call_guide">Tap the middle of your screen to call</string>
     <string name="welcome_to_insight_nplease_tell_us_your_name">Welcome to Insight \nPlease tell us your name:</string>
-
-
+    <string name="sign_out">Sign Out</string>
 
 
 </resources>

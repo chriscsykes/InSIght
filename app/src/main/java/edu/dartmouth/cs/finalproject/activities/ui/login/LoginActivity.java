@@ -1,11 +1,8 @@
 package edu.dartmouth.cs.finalproject.activities.ui.login;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.Preference;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
@@ -27,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Queue;
 
 import edu.dartmouth.cs.finalproject.R;
 import edu.dartmouth.cs.finalproject.activities.IntroActivity;
@@ -35,11 +31,12 @@ import edu.dartmouth.cs.finalproject.activities.MainActivity;
 import edu.dartmouth.cs.finalproject.activities.audio.TextToSpeechEngine;
 import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 import edu.dartmouth.cs.finalproject.activities.data.model.User;
+import edu.dartmouth.cs.finalproject.utils.Preference;
 
 //used code from smartHerd's SpeechToText Github!
 ////https://github.com/smartherd/SpeechToText.git
 
-public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
+public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private static final String TAG = "LoginActivity";
     private TextToSpeechEngine textToSpeechEngine;
@@ -50,27 +47,28 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     private boolean userExists;
 
-    edu.dartmouth.cs.finalproject.utils.Preference preference;
+    private edu.dartmouth.cs.finalproject.utils.Preference preference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // FIRST check SharedPrefs to see if user has logged out or not so we know whether or not to prompt signup/login...
-        preference = new edu.dartmouth.cs.finalproject.utils.Preference(this);
+        preference = new Preference(this);
 
         // if user hasn't logged out, take them to main activity
-        if (preference.getLoginStatus() == true) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        if (preference.getLoginStatus()) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
             return;
         }
 
 
-        textToSpeechEngine= new TextToSpeechEngine(this,  this);
+        textToSpeechEngine = new TextToSpeechEngine(this, this);
         setContentView(R.layout.activity_login);
 
-        mMessage = (TextView)findViewById(R.id.textView2);
+        mMessage = (TextView) findViewById(R.id.textView2);
 
         mLoadingProgressBar = findViewById(R.id.loading);
         mLoadingProgressBar.setVisibility(View.GONE);
@@ -79,10 +77,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         // initialize database reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference("user");
-        // mDatabase.setValue("Hello, World!");
 
-        // int userID = randomInt();
-        // writeNewUser(String.valueOf(userID), "Test User");
     }
 
     private void startDialogue() {
@@ -91,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
     }
 
     private void loginSuccess() {
-        textToSpeechEngine.speakText("Welcome "+ mName, "loginSuccess");
+        textToSpeechEngine.speakText("Welcome " + mName, "loginSuccess");
         mLoadingProgressBar.setVisibility(View.VISIBLE);
         new Handler().postDelayed(this::startOnBoarder, 3000);   //3 seconds
     }
@@ -103,7 +98,9 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     @Override
     protected void onDestroy() {
-        textToSpeechEngine.closeTextToSpeechEngine();
+        if (textToSpeechEngine != null) {
+            textToSpeechEngine.closeTextToSpeechEngine();
+        }
         super.onDestroy();
     }
 
@@ -111,9 +108,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         Intent intent = new Intent(this, IntroActivity.class);
         intent.putExtra(Constants.USERNAME, mName);
         startActivity(intent);
-        finish();
-        //Can we also close the textToSpeech engine at this point?
-        //textToSpeechEngine.closeTextToSpeechEngine();
+        finish(); // calls onDestroy which closes textToSpeechEngine
     }
 
     // Create an intent that can start the Speech Recognizer activity
@@ -133,7 +128,6 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     // This callback is invoked when the Speech Recognizer returns.
     // This is where you process the intent and extract the speech text from the intent.
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
@@ -150,38 +144,47 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
                 Query query = FirebaseDatabase.getInstance().getReference("user")
                         .orderByChild("username")
                         .equalTo(mName);
+
+                // set up a listener to detect if the user is already in the database
                 query.addListenerForSingleValueEvent(valueEventListener);
 
-                // if user is in the database, send them to MainActivity
-                if (userExists == true) {
-                    textToSpeechEngine.speakText("Welcome back "+ mName, "loginSuccess");
-                    mLoadingProgressBar.setVisibility(View.VISIBLE);
-
-                    // user is now logged in
-                    preference.setLoginStatus(true);
-
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-
-                    finish();
-                }
-                else {
-                    // need to add the new user to the database, and sent them to the onBoarder
-                    int userID = randomInt();
-                    writeNewUser(String.valueOf(userID), mName);
-                    loginSuccess();
-                }
-
             } else {
-                textToSpeechEngine.speakText("I am sorry. I could not quite hear that. Can you repeat your name for me?", "name_second_try");
+                // Uncomment for now
+                // textToSpeechEngine.speakText("I am sorry. I could not quite hear that. Can you repeat your name for me?", "name_second_try");
                 beginSpeechRecognizer();
             }
         }
     }
 
+    private void signInUser(){
+        textToSpeechEngine.speakText("Welcome back " + mName, "loginSuccess");
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
+
+        // user is now logged in
+        preference.setLoginStatus(true);
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+        Log.d(TAG, "onActivityResult: old user signing in");
+    }
+
+    private void signUpUser(){
+        // need to add the new user to the database, and sent them to the onBoarder
+        // Generate a reference to a new location and add some data using push()
+        DatabaseReference pushedNewUserRef = mDatabase.push();
+        // Get the unique ID generated by a push()
+        String postId = pushedNewUserRef.getKey();
+        writeNewUser(String.valueOf(postId), mName);
+        loginSuccess();
+        // user is now logged in
+        preference.setLoginStatus(true);
+        Log.d(TAG, "onActivityResult: created new user and signed in");
+    }
+
     @Override
     public void onInit(int status) {
-        if (status != TextToSpeech.ERROR){
+        if (status != TextToSpeech.ERROR) {
             startDialogue();
             textToSpeechEngine.getTextToSpeech().setOnUtteranceProgressListener(new UtteranceProgressListener() {
                 @Override
@@ -190,9 +193,9 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
                 @Override
                 public void onDone(String utteranceId) {
-                   if (utteranceId.equals(Constants.loginIntroductionId)){
-                       beginSpeechRecognizer();
-                   }
+                    if (utteranceId.equals(Constants.loginIntroductionId)) {
+                        beginSpeechRecognizer();
+                    }
                 }
 
                 @Override
@@ -206,24 +209,23 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
     // adds a new user to the database
     private void writeNewUser(String userID, String username) {
         User user = new User(username);
-        mDatabase.child(userID).setValue(user);
+        mDatabase.child(userID)
+                .setValue(user);
     }
 
-    // generates a random integer from [1, 100000] to be used as userID
-    private int randomInt() {
-        int random = (int) (Math.random() * 1000000 + 1);
-        return random;
-    }
 
     // listens for result from query and determines whether a user with that name exists
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()) {
+            if (dataSnapshot.exists()){
+                Log.d(TAG, "onDataChange: " + mName + " exists " + dataSnapshot.toString());
                 userExists = true;
-            }
-            else {
+                signInUser();
+            }else{
+                Log.d(TAG, "onDataChange: user does not exist in DB " + dataSnapshot.toString());
                 userExists = false;
+                signUpUser();
             }
         }
 
