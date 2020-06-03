@@ -27,6 +27,7 @@ public class Constants {
     public static String requestCallId = "requestCallId";
     public static String aboutInsightId = "aboutInsightId";
     public static String shareWithFriendsId = "shareWithFriendsId";
+    public static String signOutId = "signOutId";
 
     public static String shortTextId = "shortTextId";
     public static String barCodeId = "barCodeId";

@@ -223,7 +223,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
                 userExists = true;
                 signInUser();
             }else{
-                Log.d(TAG, "onDataChange: user already exists in DB " + dataSnapshot.toString());
+                Log.d(TAG, "onDataChange: user does not exist in DB " + dataSnapshot.toString());
                 userExists = false;
                 signUpUser();
             }

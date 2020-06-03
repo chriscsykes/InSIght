@@ -131,4 +131,13 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
         }
         super.onBackPressed();
     }
+
+    @Override
+    protected void onDestroy() {
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+        }
+        super.onDestroy();
+    }
 }
+

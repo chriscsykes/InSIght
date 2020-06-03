@@ -82,7 +82,9 @@ public class ReadTutorialsActivity extends AppCompatActivity implements TextToSp
 
     @Override
     protected void onDestroy() {
-        mTextToSpeechEngine.closeTextToSpeechEngine();
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+        }
         super.onDestroy();
     }
 

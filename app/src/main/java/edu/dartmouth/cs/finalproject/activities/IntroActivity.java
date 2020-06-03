@@ -125,8 +125,8 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
         String userName = getIntent().getStringExtra(Constants.USERNAME);
         intent.putExtra(Constants.USERNAME, userName);
         startActivity(intent);
-        super.onSkipPressed(currentFragment);
         finish();
+        super.onSkipPressed(currentFragment);
     }
 
     @Override
@@ -137,8 +137,8 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
         String userName = getIntent().getStringExtra(Constants.USERNAME);
         intent.putExtra(Constants.USERNAME, userName);
         startActivity(intent);
-        super.onDonePressed(currentFragment);
         finish();
+        super.onDonePressed(currentFragment);
     }
 
     @Override

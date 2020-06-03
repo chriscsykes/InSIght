@@ -82,7 +82,9 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     @Override
     protected void onDestroy() {
-        mTextToSpeechEngine.closeTextToSpeechEngine();
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+        }
         super.onDestroy();
     }
 
