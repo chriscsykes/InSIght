@@ -149,9 +149,8 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
                 query.addListenerForSingleValueEvent(valueEventListener);
 
             } else {
-                // Uncomment for now
-                // textToSpeechEngine.speakText("I am sorry. I could not quite hear that. Can you repeat your name for me?", "name_second_try");
-                beginSpeechRecognizer();
+                textToSpeechEngine.speakText("I am sorry. I could not quite hear that. Can you repeat your name for me?", "name_second_try");
+                //beginSpeechRecognizer();
             }
         }
     }
@@ -193,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
 
                 @Override
                 public void onDone(String utteranceId) {
-                    if (utteranceId.equals(Constants.loginIntroductionId)) {
+                    if (utteranceId.equals(Constants.loginIntroductionId)||utteranceId.equals(Constants.TryAgainID)) {
                         beginSpeechRecognizer();
                     }
                 }
