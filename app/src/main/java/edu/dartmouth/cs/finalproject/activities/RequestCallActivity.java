@@ -139,6 +139,24 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
     }
 
     @Override
+    protected void onPause() {
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+            Log.d(TAG, "onPause");
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        mTextToSpeechEngine = new TextToSpeechEngine(this, this);
+        mTextToSpeechEngine.setLanguage(Locale.UK);
+        readCallGuide();
+        Log.d(TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
         if (mTextToSpeechEngine != null){
             mTextToSpeechEngine.closeTextToSpeechEngine();

@@ -17,7 +17,7 @@ import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 
 public class ReadTutorialsActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
-    private static final String TAG = ReadTutorialsActivity.class.getName();
+    private static final String TAG = "ReadTutorialsActivity";
     private TextToSpeechEngine mTextToSpeechEngine;
 
     @Override
@@ -30,6 +30,7 @@ public class ReadTutorialsActivity extends AppCompatActivity implements TextToSp
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.read_tutorials_title);
         mTextToSpeechEngine = new TextToSpeechEngine(this, this);
+        Log.d(TAG, "onCreate()");
     }
 
 
@@ -78,6 +79,24 @@ public class ReadTutorialsActivity extends AppCompatActivity implements TextToSp
                 + getString(R.string.description4);
 
         return fullDescription;
+    }
+
+    @Override
+    protected void onPause() {
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+            Log.d(TAG, "onPause");
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        mTextToSpeechEngine = new TextToSpeechEngine(this, this);
+        mTextToSpeechEngine.setLanguage(Locale.UK);
+        readTutorials();
+        Log.d(TAG, "onResume");
+        super.onResume();
     }
 
     @Override

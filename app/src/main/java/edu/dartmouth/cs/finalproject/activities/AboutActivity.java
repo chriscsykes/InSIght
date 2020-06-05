@@ -18,7 +18,7 @@ import edu.dartmouth.cs.finalproject.activities.constants.Constants;
 
 public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
-    private static final String TAG = AboutActivity.class.getName();
+    private static final String TAG = "AboutActivity";
     private TextToSpeechEngine mTextToSpeechEngine;
 
     @Override
@@ -33,6 +33,8 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
 
 
         mTextToSpeechEngine = new TextToSpeechEngine(this, this);
+
+        Log.d(TAG, "onCreate()");
     }
 
     // allows user to press back arrow to go back to MainActivity
@@ -79,11 +81,45 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
         return fullDescription;
     }
 
+    @Override
+    protected void onPause() {
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+            Log.d(TAG, "onPause");
+        }
+        super.onPause();
+    }
+
+//    @Override
+//    protected void onStart() {
+//        mTextToSpeechEngine.setLanguage(Locale.UK);
+//        readAboutInsight();
+//        Log.d(TAG, "onStart");
+//
+//        super.onStart();
+//    }
+
+    @Override
+    protected void onResume() {
+        mTextToSpeechEngine = new TextToSpeechEngine(this, this);
+        mTextToSpeechEngine.setLanguage(Locale.UK);
+        readAboutInsight();
+        Log.d(TAG, "onResume");
+        super.onResume();
+    }
+//
+//    @Override
+//    protected void onRestart() {
+//        onInit(1);
+//        Log.d(TAG, "onRestart");
+//        super.onRestart();
+//    }
 
     @Override
     protected void onDestroy() {
         if (mTextToSpeechEngine != null){
             mTextToSpeechEngine.closeTextToSpeechEngine();
+            Log.d(TAG, "onDestroy");
         }
         super.onDestroy();
     }
