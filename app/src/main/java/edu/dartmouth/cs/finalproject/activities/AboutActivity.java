@@ -29,7 +29,7 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.about_insight_title);
-        
+
         Log.d(TAG, "onCreate()");
     }
 
@@ -77,7 +77,7 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     @Override
     protected void onPause() {
-        if (mTextToSpeechEngine != null){
+        if (mTextToSpeechEngine != null) {
             mTextToSpeechEngine.closeTextToSpeechEngine();
             Log.d(TAG, "onPause");
         }
@@ -96,7 +96,7 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
 
     @Override
     protected void onDestroy() {
-        if (mTextToSpeechEngine != null){
+        if (mTextToSpeechEngine != null) {
             mTextToSpeechEngine.closeTextToSpeechEngine();
             Log.d(TAG, "onDestroy");
         }
@@ -107,9 +107,9 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
     @Override
     public void onBackPressed() {
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             String source = intent.getStringExtra(Constants.SOURCE);
-            if (source != null && source.equals(Constants.MAIN_ACTIVITY)){
+            if (source != null && source.equals(Constants.MAIN_ACTIVITY)) {
                 startActivity(new Intent(AboutActivity.this, MainActivity.class));
             }
         }

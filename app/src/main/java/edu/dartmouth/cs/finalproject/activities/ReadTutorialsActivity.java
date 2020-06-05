@@ -29,7 +29,6 @@ public class ReadTutorialsActivity extends AppCompatActivity implements TextToSp
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.read_tutorials_title);
-//        mTextToSpeechEngine = new TextToSpeechEngine(this, this); we do this in onResume
         Log.d(TAG, "onCreate()");
     }
 

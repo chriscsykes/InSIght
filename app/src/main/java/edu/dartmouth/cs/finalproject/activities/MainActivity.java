@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
                 int rotationDegrees = image.getImageInfo().getRotationDegrees();
                 // mTextToSpeechDriver.recognizeText(image, rotationDegrees); // device Api
-                mTextToSpeechDriver.recognizeTextCloud(image,  rotationDegrees); // cloud Api
+                mTextToSpeechDriver.recognizeTextCloud(image, rotationDegrees); // cloud Api
                 break;
             case (Constants.imageRecognition):
                 Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
@@ -189,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "featureProviderDriver: unsupported Feature " + currentFeature);
         }
     }
-
 
 
     /*
@@ -227,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
 
     }
+
     /*
      * Signs the user out and returns to login Activity
      * Sets the signIn indicator to false
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         if (preference.getLoginStatus()) {
             Log.d(TAG, "signOut: user signed in but signing out now" + preference.getLoginStatus());
             preference.setLoginStatus(false);
-        }else{
+        } else {
             Log.d(TAG, "signOut: user not signed in" + preference.getLoginStatus());
         }
         startActivity(intent);
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         intent.setData(Uri.parse("smsto:"));
         intent.putExtra("sms_body", message);
         if (intent.resolveActivity(getPackageManager()) != null) {
-        startActivity(intent);
+            startActivity(intent);
         }
     }
 
@@ -471,7 +471,6 @@ public class MainActivity extends AppCompatActivity {
     public void handleTextRecognition(View view) {
         mTextToSpeechEngine.speakText("Short Text", Constants.shortTextId);
         currentFeature = Constants.shortTextRecognition;
-
     }
 
     /*

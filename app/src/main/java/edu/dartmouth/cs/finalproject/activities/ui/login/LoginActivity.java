@@ -40,7 +40,7 @@ import edu.dartmouth.cs.finalproject.utils.Preference;
 public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private static final String TAG = "LoginActivity";
-    private static final int TIME_ELAPSED = 2500;
+    private static final int TIME_ELAPSED = 2700;
     private TextToSpeechEngine textToSpeechEngine;
     private String mName;
     private TextView mMessage;
@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
             return;
         }
 
-
         setContentView(R.layout.activity_login);
         createFullScreen();
         textToSpeechEngine = new TextToSpeechEngine(this, this);
@@ -73,11 +72,9 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         mLoadingProgressBar = findViewById(R.id.loading);
         mLoadingProgressBar.setVisibility(View.GONE);
 
-
         // initialize database reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mDatabase = database.getReference("user");
-
     }
 
     /*
@@ -169,10 +166,6 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
             startActivity(intent);
             finish();
         }, TIME_ELAPSED);
-
-        // user is now logged in
-        preference.setLoginStatus(true);
-
 
         Log.d(TAG, "onActivityResult: old user signing in");
     }
