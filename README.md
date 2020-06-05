@@ -8,7 +8,7 @@
 ### Project Description:
 InSight is an Android application aimed at improving the quality of life of the visually imapaired.
 Using CameraX and Google Firebase, this app helps the visually impaired by providing features like:
-- Using Firebase authentication to log users in via speech
+- User friendly UI to log users in via speech
 - Providing audio feedback on button presses using Google's text to speech engine
 - Using Firebase ML Kit's text recogintion API to recognize text and provide audio feedback
 - Using Firebase ML Kit's image recognition API to recognize objects in the users surrounding, and provide audio feedback
@@ -77,6 +77,8 @@ From here on out:
 
 
 #### Credits
+Thank you to Professor Campbell and TA's Weichen and Subigya for a great term!
+
 Icon made by Icongeek26 from www.flaticon.com.
 
 
