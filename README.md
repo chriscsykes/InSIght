@@ -3,7 +3,7 @@
 ## Dartmouth CS65 Final Project
 
 ### Download APK
-[Click Here](https://drive.google.com/file/d/1RN2Lr7Om_vkkmr-kyk1o7294IshxdDjc/view?usp=sharing)
+[Click Here](https://docs.google.com/document/d/1mvwWwy2e5nebiwaQYuWd2iPRzch6D0QGvf40Qt62x-w/edit?usp=sharing)
 
 ### Project Description:
 InSight is an Android application aimed at improving the quality of life of the visually imapaired.
