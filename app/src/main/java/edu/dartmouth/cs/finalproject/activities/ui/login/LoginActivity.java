@@ -239,4 +239,22 @@ public class LoginActivity extends AppCompatActivity implements TextToSpeech.OnI
         }
     };
 
+    @Override
+    protected void onPause() {
+        if (textToSpeechEngine != null){
+            textToSpeechEngine.closeTextToSpeechEngine();
+            Log.d(TAG, "onPause");
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        textToSpeechEngine = new TextToSpeechEngine(this, this);
+        textToSpeechEngine.setLanguage(Locale.UK);
+        startDialogue();
+        Log.d(TAG, "onResume");
+        super.onResume();
+    }
+
 }
