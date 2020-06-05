@@ -93,6 +93,8 @@
     <string name="welcome_to_insight_please_tell_us_your_name">Please tell us your name</string>
     <string name="sign_out">Sign Out</string>
     <string name="about_insight_nav">About Insight</string>
+    <string name="swipe_left_instruction">\" Swipe to the left to continue.\"</string>
+    <string name="press_done_instruction">\" Press the done button at bottom right of screen to begin.\"</string>
 
 
 </resources>

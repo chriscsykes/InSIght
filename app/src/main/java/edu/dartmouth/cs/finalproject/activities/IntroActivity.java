@@ -95,22 +95,22 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
         switch (position) {
             case 0:
                 mTextToSpeechEngine.speakText(getString(R.string.welcome_slide) + ". " +
-                        getString(R.string.welcome_string) + " Swipe right to continue.", "DEFAULT");
+                        getString(R.string.welcome_string) + getString(R.string.swipe_left_instruction), "DEFAULT");
                 currentPage = 0;
                 break;
             case 1:
                 mTextToSpeechEngine.speakText(getString(R.string.text_to_speech_slide) + ". " +
-                        getString(R.string.text_to_speech_string) + " Swipe right to continue.", "DEFAULT");
+                        getString(R.string.text_to_speech_string) + getString(R.string.swipe_left_instruction), "DEFAULT");
                 currentPage = 1;
                 break;
             case 2:
                 mTextToSpeechEngine.speakText(getString(R.string.image_recognition_slide) + ". " +
-                        getString(R.string.image_recognition_string) + " Swipe right to continue.", "DEFAULT");
+                        getString(R.string.image_recognition_string) + getString(R.string.swipe_left_instruction), "DEFAULT");
                 currentPage = 2;
                 break;
             case 3:
                 mTextToSpeechEngine.speakText(getString(R.string.instructions_slide) + ". " +
-                        getString(R.string.instructions_string) + " Press the done button at bottom right of screen to begin.", "DEFAULT");
+                        getString(R.string.instructions_string) + getString(R.string.press_done_instruction), "DEFAULT");
                 currentPage = 3;
                 break;
         }
