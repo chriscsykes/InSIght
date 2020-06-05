@@ -58,15 +58,6 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
                 Color.BLACK,
                 Color.BLACK));
 
-//        // slide 4: image recognition
-//        addSlide(AppIntroFragment.newInstance(
-//                getString(R.string.image_recognition_slide),
-//                getString(R.string.image_recognition_string),
-//                R.drawable.facial_recognition_logo_2,
-//                ContextCompat.getColor(getApplicationContext(), R.color.slide),
-//                Color.BLACK,
-//                Color.BLACK));
-
         // Slide with basic instructions on how to use the app
         addSlide(AppIntroFragment.newInstance(getString(R.string.instructions_slide),
                 getString(R.string.instructions_string),
