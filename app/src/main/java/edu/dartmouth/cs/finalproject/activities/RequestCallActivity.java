@@ -46,7 +46,7 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Request a Call");
 
-        mTextToSpeechEngine = new TextToSpeechEngine(this, this);
+//        mTextToSpeechEngine = new TextToSpeechEngine(this, this); we do this in onResume
 
         // get references to EditText and ImageView
         mEditTextNum = findViewById(R.id.edit_text_number);
