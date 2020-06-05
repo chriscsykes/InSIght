@@ -149,9 +149,31 @@ public class IntroActivity extends AppIntro implements TextToSpeech.OnInitListen
 
     @Override
     protected void onDestroy() {
-        mTextToSpeechEngine.closeTextToSpeechEngine();
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+            Log.d(TAG, "onPause");
+        }
         super.onDestroy();
     }
 
+    @Override
+    protected void onPause() {
+        if (mTextToSpeechEngine != null){
+            mTextToSpeechEngine.closeTextToSpeechEngine();
+            mTextToSpeechEngine = null;
+            Log.d(TAG, "onPause");
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (mTextToSpeechEngine == null){
+            mTextToSpeechEngine = new TextToSpeechEngine(this, this);
+            mTextToSpeechEngine.setLanguage(Locale.UK);
+        }
+        Log.d(TAG, "onResume");
+        super.onResume();
+    }
 
 }

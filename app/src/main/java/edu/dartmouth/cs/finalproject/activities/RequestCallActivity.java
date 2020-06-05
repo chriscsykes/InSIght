@@ -46,8 +46,6 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Request a Call");
 
-        mTextToSpeechEngine = new TextToSpeechEngine(this, this);
-
         // get references to EditText and ImageView
         mEditTextNum = findViewById(R.id.edit_text_number);
         ImageView imageCall = findViewById(R.id.image_call);
@@ -67,9 +65,8 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
     // checks for permission and sets up call
     private void makePhoneCall() {
         if (ContextCompat.checkSelfPermission(RequestCallActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(RequestCallActivity.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-        }
-        else {
+            ActivityCompat.requestPermissions(RequestCallActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
             // make the actual phone call
             String dial = "tel:" + NUM_TO_CALL;
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(dial));
@@ -83,8 +80,7 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
         if (requestCode == REQUEST_CALL) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 makePhoneCall();
-            }
-            else {
+            } else {
                 Toast.makeText(this, R.string.phone_call_permission_denied, Toast.LENGTH_SHORT).show();
             }
         }
@@ -117,21 +113,20 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
      * informs the user of the call button in the middle of the screen
      */
     private void readCallGuide() {
-       if ( mTextToSpeechEngine.getTextToSpeech().isSpeaking()){
-           Log.d(TAG, "readCallGuide: is speaking");
-           mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT", TextToSpeech.QUEUE_ADD);
+        if (mTextToSpeechEngine.getTextToSpeech().isSpeaking()) {
+            Log.d(TAG, "readCallGuide: is speaking");
+            mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT", TextToSpeech.QUEUE_ADD);
+        } else {
+            mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT");
         }
-       else{
-           mTextToSpeechEngine.speakText(getString(R.string.call_guide), "DEFAULT");
-       }
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             String source = intent.getStringExtra(Constants.SOURCE);
-            if (source != null && source.equals(Constants.MAIN_ACTIVITY)){
+            if (source != null && source.equals(Constants.MAIN_ACTIVITY)) {
                 startActivity(new Intent(RequestCallActivity.this, MainActivity.class));
             }
         }
@@ -140,7 +135,7 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
 
     @Override
     protected void onPause() {
-        if (mTextToSpeechEngine != null){
+        if (mTextToSpeechEngine != null) {
             mTextToSpeechEngine.closeTextToSpeechEngine();
             Log.d(TAG, "onPause");
         }
@@ -158,7 +153,7 @@ public class RequestCallActivity extends AppCompatActivity implements TextToSpee
 
     @Override
     protected void onDestroy() {
-        if (mTextToSpeechEngine != null){
+        if (mTextToSpeechEngine != null) {
             mTextToSpeechEngine.closeTextToSpeechEngine();
         }
         super.onDestroy();

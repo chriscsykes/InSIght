@@ -16,7 +16,7 @@ import edu.dartmouth.cs.finalproject.activities.MainActivity;
 import edu.dartmouth.cs.finalproject.utils.Preference;
 
 public class SplashScreen extends AppCompatActivity {
-    private static final int TIME_ELAPSED = 2000;
+    private static final int TIME_ELAPSED = 2500;
 
     // Animation variables
     Animation topAnim, bottomAnim;
@@ -39,7 +39,6 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         createFullScreen();
         startAnimation();
-
         startLoginActivity();
     }
 
@@ -50,7 +49,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent  = new Intent(SplashScreen.this, LoginActivity.class);
+                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -61,6 +60,7 @@ public class SplashScreen extends AppCompatActivity {
     private void startAnimation() {
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+
         TextView mAppName = findViewById(R.id.app_name);
         ImageView mLoginLogo = findViewById(R.id.login_image);
         TextView mSlogan = findViewById(R.id.slogan);

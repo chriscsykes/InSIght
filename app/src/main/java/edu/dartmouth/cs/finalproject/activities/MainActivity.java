@@ -173,13 +173,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "featureProviderDriver: ShortTextRecognitionDriver");
                 int rotationDegrees = image.getImageInfo().getRotationDegrees();
                 // mTextToSpeechDriver.recognizeText(image, rotationDegrees); // device Api
-                mTextToSpeechDriver.recognizeTextCloud(image,  rotationDegrees); // cloud Api
+                mTextToSpeechDriver.recognizeTextCloud(image, rotationDegrees); // cloud Api
                 break;
             case (Constants.imageRecognition):
                 Log.d(TAG, "featureProviderDriver: ImageRecognitionDriver");
                 rotationDegrees = image.getImageInfo().getRotationDegrees();
                 // mImageDriver.labelImages(image, rotationDegrees);    // Device Api
-                 mImageDriver.labelImagesCloud(image, rotationDegrees); // cloud Api
+                mImageDriver.labelImagesCloud(image, rotationDegrees); // cloud Api
                 break;
             case (Constants.barCodeRecognition):
                 Log.d(TAG, "featureProviderDriver: barCodeRecognitionDriver");
@@ -191,14 +191,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /*
      * calls methods relating to onClick events for the navigation drawer
      */
     private boolean handleNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_tutorials:
-                 mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
+                mTextToSpeechEngine.speakText("Read Tutorials", Constants.readTutorialsId);
                 readTutorials();
                 break;
             case R.id.nav_feedback:
@@ -206,11 +205,11 @@ public class MainActivity extends AppCompatActivity {
                 provideFeedBack();
                 break;
             case R.id.nav_request_call:
-                 mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
+                mTextToSpeechEngine.speakText("Request a call", Constants.requestCallId);
                 requestCall();
                 break;
             case R.id.nav_about_insight:
-                 mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
+                mTextToSpeechEngine.speakText("About Insight", Constants.aboutInsightId);
                 learnAboutInsight();
                 break;
             case R.id.nav_share_with_friends:
@@ -227,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
 
     }
+
     /*
      * Signs the user out and returns to login Activity
      * Sets the signIn indicator to false
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         if (preference.getLoginStatus()) {
             Log.d(TAG, "signOut: user signed in but signing out now" + preference.getLoginStatus());
             preference.setLoginStatus(false);
-        }else{
+        } else {
             Log.d(TAG, "signOut: user not signed in" + preference.getLoginStatus());
         }
         startActivity(intent);
@@ -271,9 +271,9 @@ public class MainActivity extends AppCompatActivity {
         intent.setType("text/plain");
         intent.setData(Uri.parse("smsto:"));
         intent.putExtra("sms_body", message);
-//        if (intent.resolveActivity(getPackageManager()) != null) {
+        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-//        }
+        }
     }
 
     /*
@@ -283,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
     }
 
     /*
@@ -293,7 +292,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RequestCallActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish();
     }
 
     /*
@@ -303,7 +301,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ReadTutorialsActivity.class);
         intent.putExtra(Constants.SOURCE, Constants.MAIN_ACTIVITY);
         startActivity(intent);
-//        finish(); TODO
     }
 
     @Override
@@ -474,7 +471,6 @@ public class MainActivity extends AppCompatActivity {
     public void handleTextRecognition(View view) {
         mTextToSpeechEngine.speakText("Short Text", Constants.shortTextId);
         currentFeature = Constants.shortTextRecognition;
-
     }
 
     /*
@@ -520,5 +516,4 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 }
-
 

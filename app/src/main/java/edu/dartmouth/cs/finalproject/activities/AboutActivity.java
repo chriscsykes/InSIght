@@ -1,6 +1,5 @@
 package edu.dartmouth.cs.finalproject.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -30,9 +29,6 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.about_insight_title);
-
-
-        mTextToSpeechEngine = new TextToSpeechEngine(this, this);
 
         Log.d(TAG, "onCreate()");
     }
@@ -71,33 +67,23 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
      * grabs references for the different sections of the description
      */
     private String getDescriptions() {
-        String fullDescription = getString(R.string.about_insight) + " \n "
+        return getString(R.string.about_insight) + " \n "
                 + getString(R.string.creators_paragraph) + " \n "
                 + getString(R.string.about_paragraph) + " \n "
                 + getString(R.string.features_paragraph) + " \n"
                 + getString(R.string.contact_info_paragraph) + "\n "
                 + getString(R.string.credits_paragraph);
-
-        return fullDescription;
     }
 
     @Override
     protected void onPause() {
-        if (mTextToSpeechEngine != null){
+        if (mTextToSpeechEngine != null) {
             mTextToSpeechEngine.closeTextToSpeechEngine();
             Log.d(TAG, "onPause");
         }
         super.onPause();
     }
 
-//    @Override
-//    protected void onStart() {
-//        mTextToSpeechEngine.setLanguage(Locale.UK);
-//        readAboutInsight();
-//        Log.d(TAG, "onStart");
-//
-//        super.onStart();
-//    }
 
     @Override
     protected void onResume() {
@@ -107,17 +93,10 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
         Log.d(TAG, "onResume");
         super.onResume();
     }
-//
-//    @Override
-//    protected void onRestart() {
-//        onInit(1);
-//        Log.d(TAG, "onRestart");
-//        super.onRestart();
-//    }
 
     @Override
     protected void onDestroy() {
-        if (mTextToSpeechEngine != null){
+        if (mTextToSpeechEngine != null) {
             mTextToSpeechEngine.closeTextToSpeechEngine();
             Log.d(TAG, "onDestroy");
         }
@@ -128,9 +107,9 @@ public class AboutActivity extends AppCompatActivity implements TextToSpeech.OnI
     @Override
     public void onBackPressed() {
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             String source = intent.getStringExtra(Constants.SOURCE);
-            if (source != null && source.equals(Constants.MAIN_ACTIVITY)){
+            if (source != null && source.equals(Constants.MAIN_ACTIVITY)) {
                 startActivity(new Intent(AboutActivity.this, MainActivity.class));
             }
         }
